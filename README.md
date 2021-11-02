@@ -1,2 +1,2 @@
-# -eleicao-online-frontend
+# eleicao-online-frontend
 Frontend do sistema Eleição Online
