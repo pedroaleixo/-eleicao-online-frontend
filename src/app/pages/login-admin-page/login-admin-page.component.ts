@@ -1,6 +1,7 @@
-import { TokenService } from './../../core/services/token.service';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { AMBIENTE } from 'src/app/core/util/constants';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login-admin-page',
@@ -15,13 +16,13 @@ export class LoginAdminPageComponent implements OnInit {
   }
 
   loginGoogle(): void {
-    this.storageService.setItem("ambiente", "admin");
-    window.location.href="https://localhost:8443/oauth2/authorization/google";
+    this.storageService.setItem(AMBIENTE, "admin");
+    window.location.href=`${environment.apiUrl}/oauth2/authorization/google`;
   }
 
   loginFacebook(): void {
-    this.storageService.setItem("ambiente", "admin");
-    window.location.href="https://localhost:8443/oauth2/authorization/facebook";
+    this.storageService.setItem(AMBIENTE, "admin");
+    window.location.href=`${environment.apiUrl}/oauth2/authorization/facebook`;
   }
 
 }

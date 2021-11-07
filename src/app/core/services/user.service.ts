@@ -78,7 +78,7 @@ export class UserService {
     if (token) {
       const user = jwtDecode(token) as User;
       this.username = user.sub;
-      this.roles = user.perfis.split(',');
+      this.roles = user.perfis;
       this.userSubject.next(user);
     }
   }

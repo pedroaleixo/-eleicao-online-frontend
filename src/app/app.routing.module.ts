@@ -1,4 +1,3 @@
-import { VotacaoListComponent } from './features/votacao/components/votacao-list/votacao-list.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { CandidatoListComponent } from './features/candidato/components/candidato-list/candidato-list.component';
@@ -12,6 +11,7 @@ import { EleicaoListComponent } from './features/eleicao/components/eleicao-list
 import { LoginVotacaoPageComponent } from './pages/login-votacao-page/login-votacao-page.component';
 import { LoginAdminPageComponent } from './pages/login-admin-page/login-admin-page.component';
 import { RedirectPageComponent } from './pages/redirect-page/redirect-page.component';
+import { VotacaoPageComponent } from './pages/votacao-page/votacao-page.component';
 
 const routes: Routes = [
   {
@@ -58,7 +58,7 @@ const routes: Routes = [
   },
   {
     path: 'votacao',
-    component: VotacaoListComponent,
+    component: VotacaoPageComponent,
     canActivate: [AuthVotacaoGuard],
   },
   {

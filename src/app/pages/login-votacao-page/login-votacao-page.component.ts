@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { AMBIENTE } from 'src/app/core/util/constants';
+import { environment } from 'src/app/environments/environment';
 
 @Component({
   selector: 'app-login-votacao-page',
@@ -14,13 +16,13 @@ export class LoginVotacaoPageComponent implements OnInit {
   }
 
   loginGoogle(): void {
-    this.storageService.setItem("ambiente", "votacao");
-    window.location.href="https://localhost:8443/oauth2/authorization/google";
+    this.storageService.setItem(AMBIENTE, "votacao");
+    window.location.href=`${environment.apiUrl}/oauth2/authorization/google`;
   }
 
   loginFacebook(): void {
-    this.storageService.setItem("ambiente", "votacao");
-    window.location.href="https://localhost:8443/oauth2/authorization/facebook";
+    this.storageService.setItem(AMBIENTE, "votacao");
+    window.location.href=`${environment.apiUrl}/oauth2/authorization/facebook`;
   }
 
 }
