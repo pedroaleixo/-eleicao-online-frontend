@@ -73,6 +73,13 @@ export class UserService {
     return false;
   }
 
+  isPessoa(): boolean {
+    if (this.roles && this.roles.includes(Roles.PESSOA)) {
+      return true;
+    }
+    return false;
+  }
+
   private decodeAndNotify() {
     const token = this.tokenService.getToken();
     if (token) {

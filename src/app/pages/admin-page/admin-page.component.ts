@@ -16,7 +16,6 @@ export class AdminPageComponent implements OnInit {
 
   logout(){
     this.tokenService.removeToken();
-    this.router.navigate(['login-admin']);
   }
 
 }

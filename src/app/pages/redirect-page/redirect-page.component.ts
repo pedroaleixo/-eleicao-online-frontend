@@ -8,7 +8,6 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './redirect-page.component.html',
 })
 export class RedirectPageComponent implements OnInit {
-
   constructor(
     private storageService: StorageService,
     private userService: UserService,
@@ -18,12 +17,22 @@ export class RedirectPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      this.userService.setToken(params.token);
       const ambiente = this.storageService.getItem('ambiente');
-      if (ambiente === 'admin') {
-        this.router.navigate(['/admin']);
-      } else if (ambiente === 'votacao') {
-        this.router.navigate(['/votacao']);
+
+      if (params.token) {
+        this.userService.setToken(params.token);
+
+        if (ambiente === 'admin') {
+          this.router.navigate(['/admin']);
+        } else if (ambiente === 'votacao') {
+          this.router.navigate(['/votacao']);
+        }
+      } else {
+        if (ambiente === 'admin') {
+          this.router.navigate(['/login-admin']);
+        } else if (ambiente === 'votacao') {
+          this.router.navigate(['/pessoa']);
+        }
       }
     });
   }

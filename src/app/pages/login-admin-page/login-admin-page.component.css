@@ -1,11 +1,28 @@
 .container {
   display: flex;
-	flex-direction: column;
   align-items: center;
-  margin-top: 10rem;
+  justify-content: center;
+  margin-top: 7rem;
+}
+
+.card {
+  max-width: 25rem;
+  height: 13rem;
 }
 
 .titulo {
-  font-size: larger;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
+
+.conteudo {
+  display: flex;
+  justify-content: center;
+	flex-direction: column;
+}
+
+.item {
+  margin-bottom: 1rem;
+}
+

@@ -17,16 +17,13 @@ export class AuthVotacaoGuard implements CanActivate {
     private route: Router
   ) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    if (
-      !this.userService.isLogged() ||
-      !this.userService.isEleitor() ||
-      this.tokenService.isExpired()
-    ) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+
+    if(!this.userService.isLogged() || this.tokenService.isExpired()){
       this.route.navigate(['login-votacao']);
+      return false;
+    } else if(!this.userService.getRoles()){
+      this.route.navigate(['pessoa']);
       return false;
     }
     return true;

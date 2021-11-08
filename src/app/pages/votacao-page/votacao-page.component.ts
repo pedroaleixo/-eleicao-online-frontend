@@ -16,7 +16,6 @@ export class VotacaoPageComponent implements OnInit {
 
   logout(){
     this.tokenService.removeToken();
-    this.router.navigate(['login-votacao']);
   }
 
 }

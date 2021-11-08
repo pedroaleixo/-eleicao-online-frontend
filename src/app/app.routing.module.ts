@@ -12,6 +12,7 @@ import { LoginVotacaoPageComponent } from './pages/login-votacao-page/login-vota
 import { LoginAdminPageComponent } from './pages/login-admin-page/login-admin-page.component';
 import { RedirectPageComponent } from './pages/redirect-page/redirect-page.component';
 import { VotacaoPageComponent } from './pages/votacao-page/votacao-page.component';
+import { PessoaFormComponent } from './features/pessoa/components/pessoa-form/pessoa-form.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
     path: 'administrador',
     component: AdministradorListComponent,
     canActivate: [AuthAdminGuard],
+  },
+  {
+    path: 'pessoa',
+    component: PessoaFormComponent
   },
   {
     path: 'eleicao',

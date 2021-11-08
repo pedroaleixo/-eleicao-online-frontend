@@ -11,6 +11,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { CoreModule } from './core/core.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { CoreModule } from './core/core.module';
     CandidatoModule,
     EleitorModule,
     ResultadoModule,
-    VotacaoModule
+    VotacaoModule,
+    BrowserAnimationsModule,
+    PagesModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

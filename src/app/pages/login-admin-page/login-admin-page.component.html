@@ -1,5 +1,11 @@
 <div class="container">
-  <p class="titulo" >Entrar no Eleição Online</p>
-  <input class="item" type="image" alt="entrar com google" (click)="loginGoogle()" src="assets/login_google.png" />
-  <input class="item" type="image" alt="entrar com google" (click)="loginFacebook()" src="assets/login_facebook.png" />
+  <mat-card class="card">
+    <mat-card-header class="titulo">
+      <mat-card-title>Entrar no Eleição Online</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="conteudo">
+      <input class="item" type="image" alt="entrar com google" (click)="loginGoogle()" src="assets/login_google.png" />
+      <input class="item" type="image" alt="entrar com facebook" (click)="loginFacebook()" src="assets/login_facebook.png" />
+    </mat-card-content>
+  </mat-card>
 </div>
