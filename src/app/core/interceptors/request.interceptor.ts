@@ -13,12 +13,8 @@ export class RequestInterceptor implements HttpInterceptor {
         if(this.tokenService.hasToken()){
             const token = this.tokenService.getToken();
             if(token){
-              req = req.clone({
-                  setHeaders: {
-                      'x-access-token': token
-                  }
-              });
-          }
+              req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` }  });
+            }
         }
         return next.handle(req);
     }

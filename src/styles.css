@@ -5,3 +5,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.success{
+  color: #f2f9f3;
+  background-color: #34aa44;
+}
+
+.warning {
+  color: #f2f9f3;
+  background-color: #f6ab2f;
+}
+
+.error {
+  color: #f2f9f3;
+  background-color: #e6492d;
+}
+
+.mat-simple-snackbar-action {
+  color: #f2f9f3 !important;
+}
+
+.buttons-section {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons-section button {
+  margin-left: 1rem;
+}

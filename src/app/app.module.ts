@@ -14,6 +14,10 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { PagesModule } from './pages/pages.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RequestInterceptor } from './core/interceptors/request.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,9 +36,20 @@ import { PagesModule } from './pages/pages.module';
     VotacaoModule,
     BrowserAnimationsModule,
     PagesModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

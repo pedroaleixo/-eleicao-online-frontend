@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard],
   },
   {
-    path: 'pessoa',
+    path: 'public/cadastro-pessoa',
     component: PessoaFormComponent
   },
   {
@@ -67,7 +67,7 @@ const routes: Routes = [
     canActivate: [AuthVotacaoGuard],
   },
   {
-    path: 'error',
+    path: 'error/:ticket',
     component: ErrorPageComponent,
   },
   {

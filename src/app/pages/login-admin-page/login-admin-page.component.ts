@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../core/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { AMBIENTE } from 'src/app/core/util/constants';
@@ -10,7 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class LoginAdminPageComponent implements OnInit {
 
-  constructor(private storageService:StorageService) { }
+  constructor(private storageService:StorageService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
   }

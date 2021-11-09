@@ -1,1 +1,50 @@
-<p>pessoa-form works!</p>
+<div class="container">
+  <div class="row">
+    <mat-form-field class="col-sm-4" appearance="fill">
+      <mat-label>CPF</mat-label>
+      <input required matInput>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-sm-8" appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input required matInput>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-sm-3" appearance="fill">
+      <mat-label>Data de nascimento</mat-label>
+      <input required matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="col-sm-2" appearance="fill">
+      <mat-label>Gênero</mat-label>
+      <mat-select>
+        <mat-option value="M">Masculino</mat-option>
+        <mat-option value="F">Feminino</mat-option>
+        <mat-option value="O">Outros</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-sm-8" appearance="fill">
+      <mat-label>Endereço</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field class="col-sm-2" appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input required matInput>
+    </mat-form-field>
+    <mat-form-field class="col-sm-2" appearance="fill">
+      <mat-label>Telefone</mat-label>
+      <input matInput>
+    </mat-form-field>
+  </div>
+  <mat-divider></mat-divider>
+  <section class="buttons-section" layout="row" layout-align="end center">
+    <button class="col-sm-1" mat-raised-button>Voltar</button>
+    <button class="col-sm-1" mat-raised-button color="primary">Salvar</button>
+  </section>
+
+</div>
