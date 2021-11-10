@@ -18,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorInterceptor } from './core/interceptors/error-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './core/interceptors/request.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RequestInterceptor } from './core/interceptors/request.interceptor';
     BrowserAnimationsModule,
     PagesModule,
     MaterialModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   providers: [
