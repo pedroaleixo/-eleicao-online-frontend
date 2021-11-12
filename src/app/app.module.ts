@@ -1,3 +1,5 @@
+import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { PessoaModule } from './features/pessoa/pessoa.module';
 import { VotacaoModule } from './features/votacao/votacao.module';
 import { ResultadoModule } from './features/resultado/resultado.module';
@@ -22,7 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

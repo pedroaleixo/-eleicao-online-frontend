@@ -11,7 +11,9 @@ export class TokenService {
   }
 
   setToken(token: string | null) {
-    window.localStorage.setItem(KEY, token as string);
+    if(token){
+      window.localStorage.setItem(KEY, token as string);
+    }
   }
 
   getToken(): string | null {

@@ -1,0 +1,21 @@
+mat-card {
+  padding: 0px !important;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;;
+}
+
+mat-card-header {
+  background-color: rgb(228, 228, 228);
+  color:#999999;
+  border-radius: 4px 4px 0 0;
+
+}
+
+mat-card-title {
+  margin: 8px 0px !important;
+}
+
+mat-card-content {
+  padding: 1rem;
+}

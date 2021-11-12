@@ -2,6 +2,7 @@ import { StorageService } from './../../core/services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-redirect-page',
@@ -11,6 +12,7 @@ export class RedirectPageComponent implements OnInit {
   constructor(
     private storageService: StorageService,
     private userService: UserService,
+    private snackbarService: SnackbarService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -31,7 +33,8 @@ export class RedirectPageComponent implements OnInit {
         if (ambiente === 'admin') {
           this.router.navigate(['/login-admin']);
         } else if (ambiente === 'votacao') {
-          this.router.navigate(['/pessoa']);
+          this.router.navigate(['/public/cadastro-pessoa']);
+          this.snackbarService.warning('Usuário não se encontra cadastro no sistema, por favor realize o cadastro antes de acessar');
         }
       }
     });

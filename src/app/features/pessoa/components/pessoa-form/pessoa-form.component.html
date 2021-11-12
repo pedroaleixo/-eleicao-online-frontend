@@ -1,65 +1,73 @@
-<div class="container">
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cadastro de Pessoa</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container">
+      <form [formGroup]="pessoaForm" (ngSubmit)="salvar()">
+        <div class="row">
+          <mat-form-field class="col-sm-4" appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input matInput id="cpf" formControlName="cpf" [required]="true" [textMask]="{mask: cpfMask}">
+            <mat-error *ngIf="pessoaForm.controls.cpf.touched && pessoaForm.controls.cpf.invalid">
+              <span *ngIf="pessoaForm.controls.cpf.errors?.required">Campo obrigatório.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col-sm-8" appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput id="nome" formControlName="nome" [required]="true">
+            <mat-error *ngIf="pessoaForm.controls.nome.touched && pessoaForm.controls.nome.invalid">
+              <span *ngIf="pessoaForm.controls.nome.errors?.required">Campo obrigatório.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col-sm-3" appearance="outline">
+            <mat-label>Data de nascimento</mat-label>
+            <input matInput id="dataNascimento" formControlName="dataNascimento" [matDatepicker]="picker" [required]="true">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="pessoaForm.controls.dataNascimento.touched && pessoaForm.controls.dataNascimento.invalid">
+              <span *ngIf="pessoaForm.controls.dataNascimento.errors?.required">Campo obrigatório.</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-sm-2" appearance="outline">
+            <mat-label>Gênero</mat-label>
+            <mat-select id="genero" formControlName="genero" [required]="false">
+              <mat-option value="M">Masculino</mat-option>
+              <mat-option value="F">Feminino</mat-option>
+              <mat-option value="O">Outros</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col-sm-7" appearance="outline">
+            <mat-label>Endereço</mat-label>
+            <input matInput id="endereco" formControlName="endereco" [required]="false">
+          </mat-form-field>
+          <mat-form-field class="col-sm-3" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input type="email" matInput id="email" formControlName="email" [required]="true">
+            <mat-error *ngIf="pessoaForm.controls.email.touched && pessoaForm.controls.email.invalid">
+              <span *ngIf="pessoaForm.controls.email.errors?.required">Campo obrigatório.</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-sm-2" appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input matInput id="telefone" formControlName="telefone" [required]="false">
+          </mat-form-field>
+        </div>
+        <section class="buttons-section" layout="row" layout-align="end center">
+          <button class="col-sm-1" mat-raised-button *ngIf="showBotaoVoltar" (click)="voltarAdmin()">Voltar</button>
+          <button type="submit" [disabled]="!pessoaForm.valid" class="col-sm-1" mat-raised-button color="primary">Salvar</button>
+        </section>
+      </form>
 
-  <form [formGroup]="pessoaForm" (ngSubmit)="salvar()">
-    <div class="row">
-      <mat-form-field class="col-sm-4" appearance="outline">
-        <mat-label>CPF</mat-label>
-        <input matInput id="cpf" formControlName="cpf" [required]="true" [textMask]="{mask: cpfMask}">
-        <mat-error *ngIf="pessoaForm.controls.cpf.touched && pessoaForm.controls.cpf.invalid">
-          <span *ngIf="pessoaForm.controls.cpf.errors?.required">Campo obrigatório.</span>
-        </mat-error>
-      </mat-form-field>
     </div>
-    <div class="row">
-      <mat-form-field class="col-sm-8" appearance="outline">
-        <mat-label>Nome</mat-label>
-        <input matInput id="nome" formControlName="nome" [required]="true">
-        <mat-error *ngIf="pessoaForm.controls.nome.touched && pessoaForm.controls.nome.invalid">
-          <span *ngIf="pessoaForm.controls.nome.errors?.required">Campo obrigatório.</span>
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field class="col-sm-3" appearance="outline">
-        <mat-label>Data de nascimento</mat-label>
-        <input matInput id="dataNascimento" formControlName="dataNascimento" [matDatepicker]="picker" [required]="true">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="pessoaForm.controls.dataNascimento.touched && pessoaForm.controls.dataNascimento.invalid">
-          <span *ngIf="pessoaForm.controls.dataNascimento.errors?.required">Campo obrigatório.</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="col-sm-2" appearance="outline">
-        <mat-label>Gênero</mat-label>
-        <mat-select id="genero" formControlName="genero" [required]="false">
-          <mat-option value="M">Masculino</mat-option>
-          <mat-option value="F">Feminino</mat-option>
-          <mat-option value="O">Outros</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field class="col-sm-7" appearance="outline">
-        <mat-label>Endereço</mat-label>
-        <input matInput id="endereco" formControlName="endereco" [required]="false">
-      </mat-form-field>
-      <mat-form-field class="col-sm-3" appearance="outline">
-        <mat-label>E-mail</mat-label>
-        <input type="email" matInput id="email" formControlName="email" [required]="true">
-        <mat-error *ngIf="pessoaForm.controls.email.touched && pessoaForm.controls.email.invalid">
-          <span *ngIf="pessoaForm.controls.email.errors?.required">Campo obrigatório.</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="col-sm-2" appearance="outline">
-        <mat-label>Telefone</mat-label>
-        <input matInput id="telefone" formControlName="telefone" [required]="false">
-      </mat-form-field>
-    </div>
-    <mat-divider></mat-divider>
-    <section class="buttons-section" layout="row" layout-align="end center">
-      <button class="col-sm-1" mat-raised-button>Voltar</button>
-      <button type="submit" [disabled]="!pessoaForm.valid" class="col-sm-1" mat-raised-button color="primary">Salvar</button>
-    </section>
-  </form>
+  </mat-card-content>
+</mat-card>
 
-</div>
+
+
