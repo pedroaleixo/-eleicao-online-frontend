@@ -8,17 +8,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .success{
   color: #f2f9f3;
-  background-color: #34aa44;
+  background-color: #6bf37d;
 }
 
 .warning {
   color: #f2f9f3;
-  background-color: #f6ab2f;
+  background-color: #f7b955;
 }
 
 .error {
   color: #f2f9f3;
-  background-color: #e6492d;
+  background-color: #f57f6b;
 }
 
 .mat-simple-snackbar-action {

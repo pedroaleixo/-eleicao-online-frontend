@@ -1,9 +1,12 @@
+import { SnackbarService } from './../../../../core/services/snackbar.service';
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { PessoaService } from '../../services/pessoa.service';
+import { Pessoa } from '../../interfaces/Pessoa';
+import { somenteNumeros } from 'src/app/core/util/string.util';
 
 @Component({
   selector: 'app-pessoa-form',
@@ -19,7 +22,8 @@ export class PessoaFormComponent implements OnInit {
   public cpfMask = [ /\d/ , /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/ , /\d/, /\d/, '-', /\d/, /\d/,];
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private pessoaService: PessoaService, private router: Router) {}
+    private pessoaService: PessoaService, private snackbarService: SnackbarService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.pessoaForm = this.formBuilder.group({
@@ -45,8 +49,21 @@ export class PessoaFormComponent implements OnInit {
     if (!this.pessoaForm.valid) {
       return;
     }
-    this.pessoaService
-    console.log(this.pessoaForm.value);
+    let pessoaDTO = {...this.pessoaForm.value};
+    pessoaDTO.cpf = somenteNumeros(pessoaDTO.cpf);
+
+    this.pessoaService.cadastrar(pessoaDTO).subscribe(resp =>{
+      this.snackbarService.success('Pessoa cadastrada com sucesso');
+      this.pessoaForm.reset();
+
+      if(!this.showBotaoVoltar){
+        this.router.navigate(['/votacao']);
+      } else {
+
+      }
+
+    });
+
   }
 
   voltarAdmin(){

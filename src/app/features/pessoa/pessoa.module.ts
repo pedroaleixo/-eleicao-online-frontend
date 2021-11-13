@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PessoaFormComponent } from './components/pessoa-form/pessoa-form.component';
@@ -18,7 +19,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    TextMaskModule
+    TextMaskModule,
+    HttpClientModule
   ]
 })
 export class PessoaModule { }
