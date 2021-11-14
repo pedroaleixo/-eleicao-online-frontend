@@ -60,7 +60,7 @@
           </mat-form-field>
         </div>
         <section class="buttons-section" layout="row" layout-align="end center">
-          <button class="col-sm-1" mat-raised-button *ngIf="showBotaoVoltar" (click)="voltarAdmin()">Voltar</button>
+          <button class="col-sm-1" mat-raised-button *ngIf="logged" (click)="voltarAdmin()">Voltar</button>
           <button type="submit" [disabled]="!pessoaForm.valid" class="col-sm-1" mat-raised-button color="primary">Salvar</button>
         </section>
       </form>

@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { PessoaService } from '../../services/pessoa.service';
-import { Pessoa } from '../../interfaces/Pessoa';
 import { somenteNumeros } from 'src/app/core/util/string.util';
 
 @Component({
@@ -17,7 +16,7 @@ export class PessoaFormComponent implements OnInit {
 
   pessoaForm!: FormGroup;
 
-  showBotaoVoltar: boolean = false;
+  logged: boolean = false;
 
   public cpfMask = [ /\d/ , /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/ , /\d/, /\d/, '-', /\d/, /\d/,];
 
@@ -38,9 +37,9 @@ export class PessoaFormComponent implements OnInit {
 
     this.userService.getUser().subscribe(r => {
       if(r && r.perfis && r.perfis.length > 0) {
-        this.showBotaoVoltar = true;
+        this.logged = true;
       } else {
-        this.showBotaoVoltar = false;
+        this.logged = false;
       }
     });
   }
@@ -52,17 +51,20 @@ export class PessoaFormComponent implements OnInit {
     let pessoaDTO = {...this.pessoaForm.value};
     pessoaDTO.cpf = somenteNumeros(pessoaDTO.cpf);
 
-    this.pessoaService.cadastrar(pessoaDTO).subscribe(resp =>{
-      this.snackbarService.success('Pessoa cadastrada com sucesso');
-      this.pessoaForm.reset();
 
-      if(!this.showBotaoVoltar){
-        this.router.navigate(['/votacao']);
-      } else {
-
-      }
-
-    });
+    if(!this.logged){
+      this.pessoaService.cadastrarPublico(pessoaDTO).subscribe(pes => {
+        this.pessoaService.gerarTokenPessoa(pes.id).subscribe(token => {
+          this.userService.setToken(token)
+          this.router.navigate(['/votacao']);
+          this.snackbarService.success('Pessoa cadastrada com sucesso');
+      });
+      });
+    } else {
+      this.pessoaService.cadastrar(pessoaDTO).subscribe(resp =>{
+        this.snackbarService.success('Pessoa cadastrada com sucesso');
+      });
+    }
 
   }
 
