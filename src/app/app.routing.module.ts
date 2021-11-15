@@ -13,6 +13,7 @@ import { LoginAdminPageComponent } from './pages/login-admin-page/login-admin-pa
 import { RedirectPageComponent } from './pages/redirect-page/redirect-page.component';
 import { VotacaoPageComponent } from './pages/votacao-page/votacao-page.component';
 import { PessoaFormComponent } from './features/pessoa/components/pessoa-form/pessoa-form.component';
+import { PessoaListComponent } from './features/pessoa/components/pessoa-list/pessoa-list.component';
 
 const routes: Routes = [
   {
@@ -39,8 +40,17 @@ const routes: Routes = [
     canActivate: [AuthAdminGuard],
   },
   {
-    path: 'public/cadastro-pessoa',
+    path: 'public/pessoa/form',
     component: PessoaFormComponent
+  },
+  {
+    path: 'pessoa',
+    component: PessoaListComponent
+  },
+  {
+    path: 'pessoa/form',
+    component: PessoaListComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'eleicao',

@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.snackbarService.error("Acesso negado ao serviço");
             break;
           case 409:
-            this.snackbarService.error(error?.error?.mensagem);
+            this.snackbarService.error(JSON.parse(error?.error).mensagem);
             break;
           case 422:
             const violations = [...error?.error?.violations];

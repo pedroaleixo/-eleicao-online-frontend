@@ -53,15 +53,14 @@ export class PessoaFormComponent implements OnInit {
 
 
     if(!this.logged){
-      this.pessoaService.cadastrarPublico(pessoaDTO).subscribe(pes => {
-        this.pessoaService.gerarTokenPessoa(pes.id).subscribe(token => {
+      this.pessoaService.cadastrarPublico(pessoaDTO).subscribe(token => {
           this.userService.setToken(token)
           this.router.navigate(['/votacao']);
           this.snackbarService.success('Pessoa cadastrada com sucesso');
       });
-      });
     } else {
       this.pessoaService.cadastrar(pessoaDTO).subscribe(resp =>{
+        this.router.navigate(['/pessoa']);
         this.snackbarService.success('Pessoa cadastrada com sucesso');
       });
     }

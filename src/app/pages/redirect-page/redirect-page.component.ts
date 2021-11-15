@@ -33,7 +33,7 @@ export class RedirectPageComponent implements OnInit {
         if (ambiente === 'admin') {
           this.router.navigate(['/login-admin']);
         } else if (ambiente === 'votacao') {
-          this.router.navigate(['/public/cadastro-pessoa']);
+          this.router.navigate(['/public/pessoa/form']);
           this.snackbarService.warning('Usuário não se encontra cadastro no sistema, por favor realize o cadastro antes de acessar');
         }
       }

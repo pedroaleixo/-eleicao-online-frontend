@@ -20,7 +20,6 @@ import { TextMaskModule } from 'angular2-text-mask';
     MaterialModule,
     ReactiveFormsModule,
     TextMaskModule,
-    HttpClientModule
-  ]
+    HttpClientModule,  ]
 })
 export class PessoaModule { }

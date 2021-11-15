@@ -1,3 +1,4 @@
+import { LoadingModule } from './shared/loading/loading.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { PessoaModule } from './features/pessoa/pessoa.module';
@@ -43,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PagesModule,
     MaterialModule,
     ReactiveFormsModule,
+    LoadingModule,
     NgbModule
   ],
   providers: [

@@ -7,22 +7,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 .success{
-  color: #f2f9f3;
+  color: #030303;
   background-color: #6bf37d;
 }
 
 .warning {
-  color: #f2f9f3;
-  background-color: #f7b955;
+  color: #030303;
+  background-color: #f8fa88;
 }
 
 .error {
-  color: #f2f9f3;
+  color: #030303;
   background-color: #f57f6b;
 }
 
 .mat-simple-snackbar-action {
-  color: #f2f9f3 !important;
+  color: #030303!important;
 }
 
 .buttons-section {
@@ -34,3 +34,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .buttons-section button {
   margin-left: 1rem;
 }
+
+
+

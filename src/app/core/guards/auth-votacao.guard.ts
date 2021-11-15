@@ -24,8 +24,7 @@ export class AuthVotacaoGuard implements CanActivate {
       this.router.navigate(['login-votacao']);
       return false;
     } else if(!this.userService.getRoles() || this.userService.getRoles()?.length === 0){
-      console.log("Entrou")
-      this.router.navigate(['public/cadastro-pessoa']);
+      this.router.navigate(['/public/pessoa/form']);
       this.snackbarService.warning('Usuário não se encontra cadastro no sistema, por favor realize o cadastro antes de acessar');
       return false;
     }

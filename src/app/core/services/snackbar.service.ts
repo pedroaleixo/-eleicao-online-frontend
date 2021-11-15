@@ -11,7 +11,7 @@ export class SnackbarService {
     this.zone.run(() => {
       this.snackbar.open(message, 'x', {
         verticalPosition: 'top',
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         duration: 4000,
         panelClass: ['snackbar-container', type],
       });
