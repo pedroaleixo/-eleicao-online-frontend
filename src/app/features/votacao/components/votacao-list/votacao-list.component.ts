@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-votacao-list',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VotacaoListComponent implements OnInit {
 
-  constructor() { }
+  eleicao!:number;
+
+  constructor(private route: ActivatedRoute) {
+    this.eleicao = this.route.snapshot.params.eleicao;
+  }
 
   ngOnInit(): void {
   }

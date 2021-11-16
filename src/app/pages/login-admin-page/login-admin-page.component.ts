@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { AMBIENTE } from 'src/app/core/util/constants';
 import { environment } from '../../environments/environment';
+import { UserService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-admin-page',
@@ -11,9 +13,13 @@ import { environment } from '../../environments/environment';
 })
 export class LoginAdminPageComponent implements OnInit {
 
-  constructor(private storageService:StorageService, private snackbarService: SnackbarService) { }
+  constructor(private storageService:StorageService,
+    private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.userService.isLogged()){
+      this.router.navigate(['/admin']);
+    }
   }
 
   loginGoogle(): void {

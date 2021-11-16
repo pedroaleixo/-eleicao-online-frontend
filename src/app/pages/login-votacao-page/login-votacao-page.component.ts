@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { AMBIENTE } from 'src/app/core/util/constants';
 import { environment } from 'src/app/environments/environment';
 
@@ -10,9 +12,13 @@ import { environment } from 'src/app/environments/environment';
 })
 export class LoginVotacaoPageComponent implements OnInit {
 
-  constructor(private storageService:StorageService) { }
+  constructor(private storageService:StorageService,
+    private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.userService.isLogged()){
+      this.router.navigate(['/votacao']);
+    }
   }
 
   loginGoogle(): void {

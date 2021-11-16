@@ -13,7 +13,7 @@ export class EleicaoService {
 
   constructor(private http: HttpClient) { }
 
-  public listarEleicoesPorPessoaEleitor(idPessoa:number): Observable<Eleicao[]>{
-		return this.http.get<Eleicao[]>(`${API_URL}/eleicao/eleitor/${idPessoa}`);
+  public listarEleicoesPorPessoaEleitor(idPessoa:number, page:number, size:number): Observable<any>{
+		return this.http.get<any>(`${API_URL}/eleicao/eleitor/${idPessoa}?page=${page}&size=${size}`);
 	}
 }
