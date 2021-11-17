@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 7rem;
+  margin-top: 6rem;
 }
 
 .card {
@@ -14,7 +14,7 @@
 .titulo {
   display: flex;
   justify-content: center;
-  margin-bottom: 3rem;
+  color: black;
 }
 
 .conteudo {

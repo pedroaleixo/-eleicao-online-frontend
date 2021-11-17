@@ -53,7 +53,6 @@ export class VotacaoPageComponent implements AfterViewInit, OnInit {
         this.eleicaoService.listarEleicoesPorPessoaEleitor(user.pessoa, event.pageIndex,
           event.pageSize)
         .subscribe(page => {
-          console.log(page.totalElements)
           this.dataSource.data = page.content;
           this.pageIndex = event.pageIndex;
           this.pageSize = event.pageSize;

@@ -67,7 +67,11 @@ export class PessoaFormComponent implements OnInit {
 
   }
 
-  voltarAdmin(){
-    this.router.navigate(['/admin']);
+  voltar(){
+    if(!this.logged){
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/login-votacao']);
+    }
   }
 }
