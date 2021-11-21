@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { TokenService } from 'src/app/core/services/token.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { AMBIENTE } from 'src/app/core/util/constants';
 import { environment } from 'src/app/environments/environment';
@@ -13,10 +14,11 @@ import { environment } from 'src/app/environments/environment';
 export class LoginVotacaoPageComponent implements OnInit {
 
   constructor(private storageService:StorageService,
+    private tokenService:TokenService,
     private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
-    if(this.userService.isLogged()){
+    if(this.userService.isLogged() || !this.tokenService.isExpired()){
       this.router.navigate(['/votacao']);
     }
   }

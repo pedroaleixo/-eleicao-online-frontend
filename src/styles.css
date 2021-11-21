@@ -58,6 +58,14 @@ mat-card-content {
   padding: 1rem;
 }
 
+.page-title {
+  margin-top: 2rem;
+  margin-left: 4rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 
 
 

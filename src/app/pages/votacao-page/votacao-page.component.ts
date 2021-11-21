@@ -1,5 +1,4 @@
 import { SituacaoEleicao } from './../../features/eleicao/enums/situacao-eleicao';
-import { TokenService } from '../../core/services/token.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Eleicao } from 'src/app/features/eleicao/interfaces/eleicao';
 import { MatTableDataSource } from '@angular/material/table';

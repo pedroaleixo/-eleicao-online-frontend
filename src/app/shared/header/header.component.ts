@@ -11,12 +11,14 @@ export class HeaderComponent implements OnInit {
 
   showLogout: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private tokenService: TokenService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getUser().subscribe(r => {
       if(r && r.perfis && r.perfis.length > 0) {
-        this.showLogout = true;
+        if(!this.tokenService.isExpired()){
+          this.showLogout = true;
+        }
       } else {
         this.showLogout = false;
       }

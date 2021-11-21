@@ -6,6 +6,9 @@ import { User } from 'src/app/core/interfaces/User';
 import { UserService } from 'src/app/core/services/user.service';
 import { Eleicao } from 'src/app/features/eleicao/interfaces/eleicao';
 import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.service';
+import { Candidato } from 'src/app/features/candidato/interfaces/candidato';
+import { MatTableDataSource } from '@angular/material/table';
+import { Cargo } from 'src/app/features/eleicao/interfaces/cargo';
 
 @Component({
   selector: 'app-votacao-list',
@@ -16,6 +19,12 @@ export class VotacaoListComponent implements OnInit {
   eleicao!: Eleicao;
   user!: User;
   map = new Map();
+  displayedColumns: string[] = ['nome', 'numero'];
+  dataSource = new MatTableDataSource<Candidato>();
+  escolha: number = 1;
+  idsCargos: number[] = [];
+  indiceCargo: number = 0;
+  cargo!:Cargo;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,13 +79,20 @@ export class VotacaoListComponent implements OnInit {
       candidatos.forEach(candidato => {
         const key = candidato.cargo.id;
         if(!this.map.has(key)){
-          this.map.set(key, [candidato]);
+          this.map.set(key, {cargo: {...candidato.cargo}, candidatos: [candidato]});
         } else {
-          this.map.get(key).push(candidato);
+          this.map.get(key).candidatos.push(candidato);
         }
       });
-      console.log(this.map);
+      this.idsCargos = Array.from(this.map.keys());
+      const objAtual = this.map.get(this.idsCargos[this.indiceCargo]);
+      this.cargo = objAtual.cargo;
+      this.dataSource.data = objAtual.candidatos;
     })
+  }
+
+  selecionar(event:any){
+    console.log(event);
   }
 
 }
