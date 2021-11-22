@@ -1,3 +1,4 @@
+import { CargoCandidato } from './../../../eleicao/interfaces/cargo-candidato';
 import { SnackbarService } from './../../../../core/services/snackbar.service';
 import { SituacaoEleicao } from './../../../eleicao/enums/situacao-eleicao';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,7 @@ import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.servic
 import { Candidato } from 'src/app/features/candidato/interfaces/candidato';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cargo } from 'src/app/features/eleicao/interfaces/cargo';
+
 
 @Component({
   selector: 'app-votacao-list',
@@ -24,7 +26,10 @@ export class VotacaoListComponent implements OnInit {
   escolha: number = 1;
   idsCargos: number[] = [];
   indiceCargo: number = 0;
-  cargo!:Cargo;
+  cargo!: Cargo;
+  candidato!: Candidato | null;
+  escolhas: CargoCandidato[] = [];
+  mostrarSummary = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,14 +45,13 @@ export class VotacaoListComponent implements OnInit {
       .subscribe((eleicao) => {
         this.eleicao = eleicao;
         this.verificarPermissoes();
-        this.carregarCandidatos()
+        this.carregarCandidatos();
       });
   }
 
   verificarPermissoes() {
     this.userService.getUser().subscribe((user) => {
       if (user) {
-
         //Esse usuário está associado à esta eleição?
         if (user.pessoa) {
           this.eleicaoService
@@ -59,7 +63,9 @@ export class VotacaoListComponent implements OnInit {
 
               if (!isEleitor) {
                 this.router.navigate(['/votacao']);
-                this.snackbarService.error('Usuário não é eleitor da eleição acessada');
+                this.snackbarService.error(
+                  'Usuário não é eleitor da eleição acessada'
+                );
               }
             });
         }
@@ -74,25 +80,69 @@ export class VotacaoListComponent implements OnInit {
   }
 
   carregarCandidatos() {
-    this.eleicaoService.listarCandidatosEleicao(this.eleicao.id)
-    .subscribe(candidatos => {
-      candidatos.forEach(candidato => {
-        const key = candidato.cargo.id;
-        if(!this.map.has(key)){
-          this.map.set(key, {cargo: {...candidato.cargo}, candidatos: [candidato]});
-        } else {
-          this.map.get(key).candidatos.push(candidato);
-        }
+    this.eleicaoService
+      .listarCandidatosEleicao(this.eleicao.id)
+      .subscribe((candidatos) => {
+        candidatos.forEach((candidato) => {
+          const key = candidato.cargo.id;
+          if (!this.map.has(key)) {
+            this.map.set(key, {
+              cargo: { ...candidato.cargo },
+              candidatos: [candidato],
+            });
+          } else {
+            this.map.get(key).candidatos.push(candidato);
+          }
+        });
+        this.configurarDadosCargo();
       });
-      this.idsCargos = Array.from(this.map.keys());
-      const objAtual = this.map.get(this.idsCargos[this.indiceCargo]);
-      this.cargo = objAtual.cargo;
-      this.dataSource.data = objAtual.candidatos;
-    })
   }
 
-  selecionar(event:any){
-    console.log(event);
+  configurarDadosCargo() {
+    this.idsCargos = Array.from(this.map.keys());
+    const objAtual = this.map.get(this.idsCargos[this.indiceCargo]);
+    this.cargo = objAtual.cargo;
+    this.dataSource.data = objAtual.candidatos;
+  }
+
+  selecionar(element: Candidato) {
+    this.candidato = element;
+  }
+
+  confirmar() {
+    if (this.candidato) {
+      let cargoCandidato = this.escolhas.find(e => e.cargo.id === this.candidato?.cargo.id);
+      if(!cargoCandidato){
+        cargoCandidato = {cargo: this.candidato?.cargo, candidatos: []}
+        this.escolhas.push(cargoCandidato);
+      }
+      cargoCandidato.candidatos.push(this.candidato);
+
+      this.dataSource.data = this.dataSource.data.filter(c => c.id != this.candidato?.id);
+
+      this.candidato = null;
+      if (this.escolha < this.cargo?.escolhas) {
+        this.escolha += 1;
+      } else if(this.indiceCargo >= this.idsCargos.length - 1) {
+        this.mostrarSummary = true;
+        this.escolha = 1;
+        this.indiceCargo = 0;
+      } else {
+        this.escolha = 1;
+        this.indiceCargo++;
+        this.configurarDadosCargo();
+      }
+    }
+  }
+
+  votar(){
+
+  }
+
+  cancelar(){
+    this.mostrarSummary = false;
+    this.escolhas = [];
+    this.configurarDadosCargo();
   }
 
 }

@@ -1,16 +1,18 @@
 <div class="page-title">Votação</div>
-<mat-card>
+<mat-card *ngIf="!mostrarSummary">
   <mat-card-header>
     <mat-card-title>{{eleicao?.nome}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="container">
       <div class="row">
-        <div class="col-sm-2 cargo-title">Cargo: {{cargo?.nome}}</div>
+        <div class="col-sm-3 cargo-title">Cargo: {{cargo?.nome}}</div>
+        <div class="col-sm-2 cargo-title">Seleção {{escolha}} de {{cargo?.escolhas}}</div>
       </div>
     <div class="row">
       <div class="col-sm-4 cedula">
-
+        <p>{{candidato?.pessoa?.nome}}</p>
+        <p> {{candidato ? 'Número: '+candidato.numero : ''}}</p>
       </div>
       <div class="col-sm-1"></div>
       <div class="col-sm-7">
@@ -27,7 +29,7 @@
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row class="candidato" *matRowDef="let element; columns: displayedColumns;"></tr>
+          <tr mat-row class="candidato" *matRowDef="let element; columns: displayedColumns;" (click)="selecionar(element)"></tr>
 
         </table>
       </div>
@@ -35,9 +37,32 @@
     <div class="row">
       <button class="col-sm-1" mat-raised-button>Branco</button>
       <div class="col-sm-2"></div>
-      <button class="col-sm-1" mat-raised-button color="primary">Confirmar</button>
+      <button class="col-sm-1" mat-raised-button color="primary" (click)="confirmar()">Confirmar</button>
     </div>
   </div>
+  </mat-card-content>
+</mat-card>
+
+
+<mat-card *ngIf="mostrarSummary">
+  <mat-card-header>
+    <mat-card-title>{{eleicao?.nome}} - Resumo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="conteudo-resumo">
+      <div *ngFor="let cargoCandidato of escolhas">
+        <div class="item-cargo-resumo">
+          {{cargoCandidato.cargo.nome}}
+        </div>
+        <div *ngFor="let candidato of cargoCandidato.candidatos">
+          {{candidato.pessoa.nome}}
+        </div>
+      </div>
+    </div>
+    <div class="botoes-resumo">
+      <button mat-raised-button color="secondary" (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="primary" (click)="votar()">Confirmar</button>
+    </div>
   </mat-card-content>
 </mat-card>
 
