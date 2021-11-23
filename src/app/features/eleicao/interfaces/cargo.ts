@@ -1,6 +1,6 @@
 export interface Cargo {
   id:number;
   nome:string;
-	votosBrancos:string;
+	votosBrancos:number;
   escolhas:number;
 }

@@ -7,7 +7,7 @@ export interface Candidato {
   id:number;
   numero:number;
   votos:number;
-  pessoa:Pessoa;
+  pessoa:Pessoa | null;
   eleicao:Eleicao;
   cargo:Cargo;
   acoes:any;

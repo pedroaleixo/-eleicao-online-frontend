@@ -23,7 +23,7 @@ export class VotacaoListComponent implements OnInit {
   map = new Map();
   displayedColumns: string[] = ['nome', 'numero'];
   dataSource = new MatTableDataSource<Candidato>();
-  escolha: number = 1;
+  selecao: number = 1;
   idsCargos: number[] = [];
   indiceCargo: number = 0;
   cargo!: Cargo;
@@ -109,6 +109,27 @@ export class VotacaoListComponent implements OnInit {
     this.candidato = element;
   }
 
+  branco(){
+    let cargoCandidato = this.escolhas.find(e => e.cargo.id === this.cargo.id);
+    if(!cargoCandidato){
+      cargoCandidato = {cargo: this.cargo, candidatos: []}
+      this.escolhas.push(cargoCandidato);
+    }
+    cargoCandidato.candidatos.push({
+      id: 0,
+      numero: 0,
+      votos: 0,
+      pessoa: null,
+      eleicao: this.eleicao,
+      cargo: this.cargo,
+      acoes: null,
+    });
+
+
+    this.ajustarNavegacao();
+  }
+
+
   confirmar() {
     if (this.candidato) {
       let cargoCandidato = this.escolhas.find(e => e.cargo.id === this.candidato?.cargo.id);
@@ -117,21 +138,9 @@ export class VotacaoListComponent implements OnInit {
         this.escolhas.push(cargoCandidato);
       }
       cargoCandidato.candidatos.push(this.candidato);
-
       this.dataSource.data = this.dataSource.data.filter(c => c.id != this.candidato?.id);
 
-      this.candidato = null;
-      if (this.escolha < this.cargo?.escolhas) {
-        this.escolha += 1;
-      } else if(this.indiceCargo >= this.idsCargos.length - 1) {
-        this.mostrarSummary = true;
-        this.escolha = 1;
-        this.indiceCargo = 0;
-      } else {
-        this.escolha = 1;
-        this.indiceCargo++;
-        this.configurarDadosCargo();
-      }
+      this.ajustarNavegacao();
     }
   }
 
@@ -143,6 +152,21 @@ export class VotacaoListComponent implements OnInit {
     this.mostrarSummary = false;
     this.escolhas = [];
     this.configurarDadosCargo();
+  }
+
+  private ajustarNavegacao() {
+    this.candidato = null;
+    if (this.selecao < this.cargo?.escolhas) {
+      this.selecao += 1;
+    } else if (this.indiceCargo >= this.idsCargos.length - 1) {
+      this.mostrarSummary = true;
+      this.selecao = 1;
+      this.indiceCargo = 0;
+    } else {
+      this.selecao = 1;
+      this.indiceCargo++;
+      this.configurarDadosCargo();
+    }
   }
 
 }

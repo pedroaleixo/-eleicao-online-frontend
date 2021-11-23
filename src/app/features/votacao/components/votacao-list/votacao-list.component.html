@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3 cargo-title">Cargo: {{cargo?.nome}}</div>
-        <div class="col-sm-2 cargo-title">Seleção {{escolha}} de {{cargo?.escolhas}}</div>
+        <div class="col-sm-2 cargo-title">Seleção {{selecao}} de {{cargo?.escolhas}}</div>
       </div>
     <div class="row">
       <div class="col-sm-4 cedula">
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="row">
-      <button class="col-sm-1" mat-raised-button>Branco</button>
+      <button class="col-sm-1" mat-raised-button (click)="branco()">Branco</button>
       <div class="col-sm-2"></div>
       <button class="col-sm-1" mat-raised-button color="primary" (click)="confirmar()">Confirmar</button>
     </div>
@@ -55,8 +55,13 @@
           {{cargoCandidato.cargo.nome}}
         </div>
         <div *ngFor="let candidato of cargoCandidato.candidatos">
-          {{candidato.pessoa.nome}}
-        </div>
+            <div *ngIf="candidato.id">
+              {{candidato.pessoa?.nome}}
+            </div>
+            <div *ngIf="!candidato.id">
+              Branco
+            </div>
+          </div>
       </div>
     </div>
     <div class="botoes-resumo">

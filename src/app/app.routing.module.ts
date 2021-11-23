@@ -1,4 +1,3 @@
-import { VotacaoSummaryComponent } from './features/votacao/components/votacao-summary/votacao-summary.component';
 import { VotacaoListComponent } from './features/votacao/components/votacao-list/votacao-list.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -81,11 +80,6 @@ const routes: Routes = [
   {
     path: 'votacao/list/:eleicao',
     component: VotacaoListComponent,
-    canActivate: [AuthVotacaoGuard],
-  },
-  {
-    path: 'votacao/summary/:eleicao',
-    component: VotacaoSummaryComponent,
     canActivate: [AuthVotacaoGuard],
   },
   {
