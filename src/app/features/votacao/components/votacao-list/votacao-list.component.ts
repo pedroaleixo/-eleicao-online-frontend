@@ -1,3 +1,5 @@
+import { EncryptionService } from './../../../../core/services/encryption.service';
+import { Voto } from './../../../eleicao/interfaces/voto';
 import { CargoCandidato } from './../../../eleicao/interfaces/cargo-candidato';
 import { SnackbarService } from './../../../../core/services/snackbar.service';
 import { SituacaoEleicao } from './../../../eleicao/enums/situacao-eleicao';
@@ -10,6 +12,8 @@ import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.servic
 import { Candidato } from 'src/app/features/candidato/interfaces/candidato';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cargo } from 'src/app/features/eleicao/interfaces/cargo';
+import { VotacaoService } from '../../services/votacao.service';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -31,11 +35,14 @@ export class VotacaoListComponent implements OnInit {
   escolhas: CargoCandidato[] = [];
   mostrarSummary = false;
 
+
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private eleicaoService: EleicaoService,
+    private votacaoService: VotacaoService,
     private snackbarService: SnackbarService,
+    private encryptionService:EncryptionService,
     private router: Router
   ) {}
 
@@ -137,14 +144,51 @@ export class VotacaoListComponent implements OnInit {
         cargoCandidato = {cargo: this.candidato?.cargo, candidatos: []}
         this.escolhas.push(cargoCandidato);
       }
-      cargoCandidato.candidatos.push(this.candidato);
+      cargoCandidato.candidatos.push({...this.candidato});
       this.dataSource.data = this.dataSource.data.filter(c => c.id != this.candidato?.id);
 
       this.ajustarNavegacao();
+      this.candidato = null;
     }
   }
 
   votar(){
+    console.log(this.escolhas);
+
+
+    let idsCandidatos: number[] = [];
+    this.escolhas.forEach(e => {
+      idsCandidatos = idsCandidatos.concat(e.candidatos.map(c => c.id));
+    });
+
+    this.votacaoService.obterChavePublica()
+    .pipe(take(1))
+    .subscribe(chavePublica => {
+      const escolhaEncriptada = "";///this.encryptionService.encryptVoto(chavePublica, idsCandidatos);
+
+      this.userService.getUser()
+      .pipe(take(1))
+      .subscribe(user => {
+        if(user) {
+        const voto:Voto = {
+          id: null,
+          idPessoa: user.pessoa,
+          votoCriptografado: escolhaEncriptada,
+          eleicao: this.eleicao
+        };
+
+        this.votacaoService.cadastrarVoto(voto)
+        .pipe(take(1))
+        .subscribe(resp => {
+          this.snackbarService.success("Voto registrado com sucesso")
+          this.router.navigate(['votacao']);
+        });
+      }
+    });
+
+
+    });
+
 
   }
 

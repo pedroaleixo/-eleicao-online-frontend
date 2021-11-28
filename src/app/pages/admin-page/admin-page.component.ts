@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AdminPageComponent implements OnInit {
 
-  constructor(private tokenService: TokenService, private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  logout(){
-    this.tokenService.removeToken();
+  irPara(page:string){
+    this.router.navigate([page]);
   }
 
 }

@@ -1,0 +1,24 @@
+
+.card {
+  max-width: 15rem;
+  height: 14rem;
+  border: 0.15rem solid #ede8e8;
+  margin-bottom: 1.5rem;
+}
+
+
+.conteudo {
+  display: flex;
+  justify-content: center;
+	flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-top: 1rem;
+}
+
+

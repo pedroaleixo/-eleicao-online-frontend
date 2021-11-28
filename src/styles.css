@@ -7,18 +7,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 .success{
-  color: #030303;
-  background-color: #6bf37d;
+  color: #868585;
+  background-color: #affcb8;
 }
 
 .warning {
-  color: #030303;
-  background-color: #f8fa88;
+  color: #868585;
+  background-color: #f7f8cd;
 }
 
 .error {
-  color: #030303;
-  background-color: #f57f6b;
+  color: #868585;
+  background-color: #f7a090;
 }
 
 .mat-simple-snackbar-action {

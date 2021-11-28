@@ -1,8 +1,8 @@
 import { Eleicao } from './eleicao';
 
 export interface Voto {
-  id: number;
-  idEleitor: number;
-  votoCriptografado: string;
+  id: number | null;
+  idPessoa: number;
+  votoCriptografado: string | null;
   eleicao: Eleicao;
 }
