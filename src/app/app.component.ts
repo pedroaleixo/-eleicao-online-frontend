@@ -9,6 +9,7 @@ import { filter, map, switchMap } from 'rxjs/operators';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,

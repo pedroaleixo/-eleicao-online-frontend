@@ -1,10 +1,31 @@
 <mat-toolbar class="toolbar">
-  <span>Eleição Online</span>
+  <button (click)="sidenav.toggle()" mat-button aria-label="botão de menu" class="menu" *ngIf="showMenu">
+    <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+  </button>
+  <span class="home" (click)="goToHome()">Eleição Online</span>
   <span class="example-spacer"></span>
-  <button (click)="logout()" mat-icon-button class="example-icon" aria-label="botão de logout" *ngIf="showLogout">
+  <button (click)="logout()" mat-icon-button aria-label="botão de logout" *ngIf="showLogout">
     <mat-icon>logout</mat-icon>
   </button>
+
 </mat-toolbar>
 <div class="fixed-top">
   <ap-loading></ap-loading>
 </div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav">
+    <a mat-button routerLink="/administrador">Manter Administrador</a>
+    <a mat-button routerLink="/pessoa">Manter Pessoa</a>
+    <a mat-button routerLink="/eleicao">Manter Eleição</a>
+    <a mat-button routerLink="/candidato">Manter Candidato</a>
+    <a mat-button routerLink="/eleitor">Manter Eleitor</a>
+    <a mat-button routerLink="/consultar-estatisticas">Consultar Estatísticas</a>
+    <a mat-button routerLink="/consultar-eleitores-votantes">Consultar Eleitores Votantes</a>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

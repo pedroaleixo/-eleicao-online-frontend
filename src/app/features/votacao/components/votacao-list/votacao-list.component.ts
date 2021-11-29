@@ -14,6 +14,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Cargo } from 'src/app/features/eleicao/interfaces/cargo';
 import { VotacaoService } from '../../services/votacao.service';
 import { take } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { CancelamentoDialogComponent } from '../cancelamento-dialog/cancelamento-dialog.component';
 
 
 @Component({
@@ -43,6 +45,7 @@ export class VotacaoListComponent implements OnInit {
     private votacaoService: VotacaoService,
     private snackbarService: SnackbarService,
     private encryptionService:EncryptionService,
+    public dialog: MatDialog,
     private router: Router
   ) {}
 
@@ -186,10 +189,18 @@ export class VotacaoListComponent implements OnInit {
       }
     });
 
-
     });
 
+  }
 
+  confirmarCancelamento(){
+    const dialogRef = this.dialog.open(CancelamentoDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.cancelar()
+      }
+    });
   }
 
   cancelar(){
@@ -214,3 +225,5 @@ export class VotacaoListComponent implements OnInit {
   }
 
 }
+
+
