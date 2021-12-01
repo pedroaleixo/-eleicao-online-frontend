@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { ELEICAO_ATIVA } from 'src/app/core/util/constants';
+import { Eleicao } from 'src/app/features/eleicao/interfaces/eleicao';
+import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.service';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +17,13 @@ export class HeaderComponent implements OnInit {
   showLogout: boolean = false;
   showMenu: boolean = false;
   isMenuOpen: boolean = false;
+  eleicoes:Eleicao[] = [];
 
   constructor(
     private storageService: StorageService,
     private tokenService: TokenService,
     private userService: UserService,
+    private eleicaoService: EleicaoService,
     private router: Router
   ) {}
 
@@ -29,6 +35,8 @@ export class HeaderComponent implements OnInit {
           const ambiente = this.storageService.getItem('ambiente');
           if (this.userService.isAdmin() && ambiente === 'admin') {
             this.showMenu = true;
+            this.eleicaoService.listarEleicoes().pipe(take(1))
+              .subscribe(eles => this.eleicoes = eles);
           } else {
             this.showMenu = false;
           }
@@ -50,5 +58,9 @@ export class HeaderComponent implements OnInit {
 
   goToHome() {
     this.router.navigate(['/redirect']);
+  }
+
+  selecionarEleicao(event:any){
+    this.storageService.setItem(ELEICAO_ATIVA, event.value);
   }
 }

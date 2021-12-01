@@ -15,6 +15,10 @@ export class EleicaoService {
 
   constructor(private http: HttpClient) { }
 
+  public listarEleicoes(): Observable<Eleicao[]>{
+    return this.http.get<Eleicao[]>(`${API_URL}/eleicao`);
+	}
+
   public listarEleicoesPorPessoaEleitor(idPessoa:number, page?:number, size?:number): Observable<any>{
     if(page && size){
 		  return this.http.get<any>(`${API_URL}/eleicao/eleitor/${idPessoa}?page=${page}&size=${size}`);

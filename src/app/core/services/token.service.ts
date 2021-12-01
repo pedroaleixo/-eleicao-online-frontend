@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import { AMBIENTE } from '../util/constants';
+import { AMBIENTE, ELEICAO_ATIVA } from '../util/constants';
 
 const KEY = 'token';
 
@@ -23,6 +23,7 @@ export class TokenService {
   removeToken(): void {
     window.localStorage.removeItem(KEY);
     window.localStorage.removeItem(AMBIENTE);
+    window.localStorage.removeItem(ELEICAO_ATIVA);
   }
 
   isExpired(): boolean {
