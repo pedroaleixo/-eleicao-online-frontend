@@ -4,7 +4,7 @@
   </button>
   <span class="home" (click)="goToHome()">Eleição Online</span>
   <span class="example-spacer"></span>
-  <mat-form-field appearance="fill" class="select">
+  <mat-form-field appearance="fill" class="select" *ngIf="showMenu">
     <mat-label>Eleição ativa</mat-label>
     <mat-select (selectionChange)="selecionarEleicao($event)">
       <mat-option *ngFor="let eleicao of eleicoes" [value]="eleicao.id" >
