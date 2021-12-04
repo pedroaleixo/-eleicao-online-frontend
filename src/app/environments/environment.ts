@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://eleicao-online-backend.herokuapp.com'
+  apiUrl: 'https://localhost:8443'
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file
