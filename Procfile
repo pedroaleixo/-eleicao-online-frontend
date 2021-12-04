@@ -1,1 +1,1 @@
-web npm start --configuration=production
+web npm run prod
