@@ -3,11 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-<<<<<<< HEAD
   production: true,
-=======
-  production: false,
->>>>>>> 30c193642263d000bc4e7a840cddbcf3cac0afc8
   apiUrl: 'https://eleicao-online-backend.herokuapp.com'
 };
 
