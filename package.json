@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "prod":"node --optimize_for_size --max_old_space_size=256--gc_interval=100 ./node_modules/@angular/cli/bin/ng serve --configuration production",
+    "prod":"node --optimize_for_size --max_old_space_size=128 --gc_interval=100 ./node_modules/@angular/cli/bin/ng serve --configuration production",
     "test": "ng test",
     "heroku-postbuild": "ng build --prod"
   },
