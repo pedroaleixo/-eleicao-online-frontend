@@ -1,4 +1,4 @@
-{
+
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -39,7 +39,11 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
+
                   "maximumError": "10mb"
+
+                
+
                 },
                 {
                   "type": "anyComponentStyle",
@@ -78,6 +82,7 @@
           },
           "defaultConfiguration": "development"
         },
+
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
