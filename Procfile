@@ -1,1 +1,1 @@
-web ng build --configuration production
+web npm start
