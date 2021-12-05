@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "node --optimize_for_size --max_old_space_size=460 server.js",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "prod":"node --optimize_for_size --max_old_space_size=500 --gc_interval=100 ./node_modules/@angular/cli/bin/ng build --configuration production",
