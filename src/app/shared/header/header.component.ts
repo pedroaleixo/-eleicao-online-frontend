@@ -37,6 +37,10 @@ export class HeaderComponent implements OnInit {
             this.showMenu = true;
             this.eleicaoService.listarEleicoes().pipe(take(1))
               .subscribe(eles => this.eleicoes = eles);
+          } else if (this.userService.isComissao() && ambiente === 'admin'){
+            this.showMenu = true;
+            this.eleicaoService.listarEleicoesPorPessoaMembroComissao(r.pessoa).pipe(take(1))
+              .subscribe(eles => this.eleicoes = eles);
           } else {
             this.showMenu = false;
           }

@@ -7,9 +7,7 @@ import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.servic
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 import { EleitorService } from 'src/app/features/eleitor/services/eleitor.service';
-import { Observable } from 'rxjs';
-import { Eleitor } from 'src/app/features/eleitor/interfaces/eleitor';
-import { take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-votacao-page',

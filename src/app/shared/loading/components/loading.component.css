@@ -1,8 +1,8 @@
 .loading {
-  margin: 0;
-  background: linear-gradient(270deg, #999999, white,  #9393fa, #fcbb9d);
-  animation: progress 2s ease;
-  height: 0.2em;
+  position: fixed;
+  top: 40%;
+  left: 45%;
+  z-index: 9999;
 }
 
 @keyframes progress {
@@ -14,6 +14,12 @@
   }
 }
 
-.stopped {
+
+.stopped{
   display: none;
 }
+
+
+
+
+

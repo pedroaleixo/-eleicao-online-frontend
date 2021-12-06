@@ -1,4 +1,3 @@
-import { EleicaoAtivaDialogComponent } from './admin-page/eleicao-ativa-dialog/eleicao-ativa-dialog.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginAdminPageComponent } from './login-admin-page/login-admin-page.component';
 import { VotacaoPageComponent } from './votacao-page/votacao-page.component';
@@ -13,7 +12,6 @@ import { LoginVotacaoPageComponent } from './login-votacao-page/login-votacao-pa
     LoginAdminPageComponent,
     LoginVotacaoPageComponent,
     AdminPageComponent,
-    EleicaoAtivaDialogComponent,
     VotacaoPageComponent,
     ErrorPageComponent
   ],
