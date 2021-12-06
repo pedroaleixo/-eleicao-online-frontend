@@ -35,4 +35,8 @@ export class EleicaoService {
     return this.http.get<Candidato[]>(`${API_URL}/eleicao/${idEleicao}/candidatos`);
 	}
 
+  public listarEleicoesPorPessoaMembroComissao(idPessoa:number): Observable<Eleicao[]>{
+    return this.http.get<Eleicao[]>(`${API_URL}/eleicao/membro-comissao/${idPessoa}`);
+  }
+
 }
