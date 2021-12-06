@@ -1,3 +1,4 @@
+import { EleicaoAtivaGuard } from './core/guards/eleicao-ativa.guard';
 import { VotacaoListComponent } from './features/votacao/components/votacao-list/votacao-list.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -61,12 +62,12 @@ const routes: Routes = [
   {
     path: 'candidato',
     component: CandidatoListComponent,
-    canActivate: [AuthAdminGuard],
+    canActivate: [AuthAdminGuard, EleicaoAtivaGuard],
   },
   {
     path: 'eleitor',
     component: EleitorListComponent,
-    canActivate: [AuthAdminGuard],
+    canActivate: [AuthAdminGuard, EleicaoAtivaGuard],
   },
   {
     path: 'login-votacao',

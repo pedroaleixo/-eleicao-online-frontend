@@ -61,6 +61,10 @@ export class HeaderComponent implements OnInit {
   }
 
   selecionarEleicao(event:any){
-    this.storageService.setItem(ELEICAO_ATIVA, event.value);
+    if(event && event.value){
+      this.storageService.setItem(ELEICAO_ATIVA, event.value);
+    } else {
+      this.storageService.removeItem(ELEICAO_ATIVA);
+    }
   }
 }
