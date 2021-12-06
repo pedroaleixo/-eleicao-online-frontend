@@ -22,6 +22,7 @@ export class AuthAdminGuard implements CanActivate {
     private router: Router
   ) {}
 
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     if (!this.userService.isLogged() || this.tokenService.isExpired()) {
       this.router.navigate(['login-admin']);
