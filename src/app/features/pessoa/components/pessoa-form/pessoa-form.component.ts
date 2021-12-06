@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { PessoaService } from '../../services/pessoa.service';
 import { somenteNumeros } from 'src/app/core/util/string.util';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-pessoa-form',
@@ -21,8 +22,8 @@ export class PessoaFormComponent implements OnInit {
   public cpfMask = [ /\d/ , /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/ , /\d/, /\d/, '-', /\d/, /\d/,];
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private pessoaService: PessoaService, private snackbarService: SnackbarService,
-    private router: Router) {}
+    private storageService: StorageService, private pessoaService: PessoaService,
+    private snackbarService: SnackbarService, private router: Router) {}
 
   ngOnInit(): void {
     this.pessoaForm = this.formBuilder.group({
@@ -68,10 +69,11 @@ export class PessoaFormComponent implements OnInit {
   }
 
   voltar(){
-    if(!this.logged){
+    const ambiente = this.storageService.getItem('ambiente');
+    if (ambiente === 'admin') {
       this.router.navigate(['/admin']);
-    } else {
-      this.router.navigate(['/login-votacao']);
+    } else if (ambiente === 'votacao') {
+      this.router.navigate(['/votacao']);
     }
   }
 }

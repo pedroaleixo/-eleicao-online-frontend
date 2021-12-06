@@ -17,10 +17,6 @@
   color: black;
 }
 
-.fonte {
-  font-size: 1.2rem;
-}
-
 .conteudo {
   display: flex;
   justify-content: center;

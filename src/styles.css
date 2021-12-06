@@ -35,12 +35,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: 1rem;
 }
 
-
 mat-card {
   padding: 0px !important;
-  margin-top: 2rem;
-  margin-left: 4rem;
-  margin-right: 4rem;;
 }
 
 mat-card-header {
