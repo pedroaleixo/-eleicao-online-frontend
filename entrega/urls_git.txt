@@ -1,0 +1,2 @@
+https://github.com/pedroaleixo/eleicao-online-frontend
+https://github.com/pedroaleixo/eleicao-online-backend

@@ -1,0 +1,15 @@
+perfil: Admin
+email: eladm733c6d2136@gmail.com
+senha: KcYu678#
+
+perfil: Comissão Eleitoral
+email: elcomi733c6d2136@gmail.com
+senha: KcYu678#
+
+perfil: Eleitor
+email: elelei733c6d2136@gmail.com
+senha: KcYu678#
+
+
+
+
