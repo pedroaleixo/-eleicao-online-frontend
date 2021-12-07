@@ -1,5 +1,5 @@
 url eleitor: https://eleicao-online-frontend.herokuapp.com/
-url admin: https://eleicao-online-frontend.herokuapp.com/admin
+url admin: https://eleicao-online-frontend.herokuapp.com/login-admin
 
 
 
