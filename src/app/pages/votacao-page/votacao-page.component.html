@@ -3,8 +3,8 @@
     <mat-card-title>Lista de Eleições</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="container">
-        <table mat-table [dataSource]="dataSource">
+    <div class="table-container">
+        <table mat-table matSort matTableResponsive [dataSource]="dataSource">
 
           <ng-container matColumnDef="nome">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
@@ -21,7 +21,7 @@
             <td mat-cell *matCellDef="let element"> {{element.dataHoraFim | date: 'dd/MM/yyyy HH:mm:SS'}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="acoes">
+          <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let eleicao">
               <button mat-raised-button color="primary" (click)="votarEleicao(eleicao)" *ngIf="podeVotar(eleicao)" >Votar</button>
@@ -29,7 +29,7 @@
           </ng-container>
 
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
 
           <tr class="mat-row" *matNoDataRow>

@@ -41,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTableResponsiveModule } from './shared/mat-table-responsive/mat-table-responsive.module';
 
 @NgModule({
   declarations: [],
@@ -83,7 +84,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSortModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableResponsiveModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -122,7 +124,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSortModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableResponsiveModule
   ]
 })
 export class MaterialModule { }

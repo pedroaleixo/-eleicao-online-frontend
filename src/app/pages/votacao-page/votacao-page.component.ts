@@ -12,11 +12,11 @@ import { EleitorService } from 'src/app/features/eleitor/services/eleitor.servic
 @Component({
   selector: 'app-votacao-page',
   templateUrl: './votacao-page.component.html',
-  styleUrls: ['./votacao-page.component.css']
+  styleUrls: ['./votacao-page.component.scss']
 })
 export class VotacaoPageComponent implements AfterViewInit, OnInit {
 
-  displayedColumns: string[] = ['nome', 'dataHoraInicio', 'dataHoraFim', 'acoes'];
+  displayedColumns: string[] = ['nome', 'dataHoraInicio', 'dataHoraFim', 'actions'];
   dataSource = new MatTableDataSource<Eleicao>();
   pageEvent!: PageEvent;
   pageIndex!: number;
