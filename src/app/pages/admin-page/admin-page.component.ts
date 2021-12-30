@@ -18,8 +18,8 @@ export class AdminPageComponent implements OnInit {
     this.router.navigate([page]);
   }
 
-  isComissao(): boolean{
-    return this.userService.isComissao();
+  isAdmin(): boolean{
+    return this.userService.isAdmin();
   }
 
 }

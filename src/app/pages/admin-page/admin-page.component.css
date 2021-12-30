@@ -1,9 +1,15 @@
 
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .card {
   margin-top: 1rem;
-  margin-left: 5rem;
+  margin-right: 1rem;
 }
-
 
 .conteudo {
   display: flex;

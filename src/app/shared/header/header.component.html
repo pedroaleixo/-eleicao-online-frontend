@@ -1,22 +1,30 @@
 <mat-toolbar class="toolbar">
-  <button (click)="sidenav.toggle()" mat-button aria-label="botão de menu" class="menu" *ngIf="showMenu">
-    <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
-  </button>
-  <span class="home" (click)="goToHome()">Eleição Online</span>
-  <span class="example-spacer"></span>
-  <mat-form-field appearance="fill" class="select" *ngIf="showMenu">
-    <mat-label>Eleição ativa</mat-label>
-    <mat-select (selectionChange)="selecionarEleicao($event)" placeholder="Selecione">
-      <mat-option  value=""></mat-option>
-      <mat-option *ngFor="let eleicao of eleicoes" [value]="eleicao.id" >
-        {{eleicao.nome}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button (click)="logout()" mat-icon-button aria-label="botão de logout" *ngIf="showLogout">
-    <mat-icon>logout</mat-icon>
-  </button>
+
+  <div>
+    <button (click)="sidenav.toggle()" mat-button aria-label="botão de menu" class="menu" *ngIf="showMenu">
+      <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+    </button>
+
+    <span class="home" (click)="goToHome()">Eleição Online</span>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" class="select" *ngIf="showMenu">
+      <mat-label>Eleição ativa</mat-label>
+      <mat-select (selectionChange)="selecionarEleicao($event)" placeholder="Selecione">
+        <mat-option value=""></mat-option>
+        <mat-option *ngFor="let eleicao of eleicoes" [value]="eleicao.id">
+          {{eleicao.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button (click)="logout()" mat-icon-button aria-label="botão de logout" *ngIf="showLogout">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav">
     <a mat-button routerLink="/administrador">Manter Administrador</a>
@@ -33,4 +41,3 @@
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
