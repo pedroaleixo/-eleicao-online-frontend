@@ -17,12 +17,26 @@
   }
  }
 
- @media not all and (min-width: 510px) {
+ @media all and (min-width: 380px) and (max-width: 509px) {
   .mat-form-field-infix{
     width: 7rem !important;
     font-size: 1rem;
   }
+}
+
+  @media all and (min-width: 316px) and (max-width: 379px) {
+    .mat-form-field-infix{
+      width: 3rem !important;
+      font-size: 1rem;
+    }
  }
+
+ @media all and (min-width: 200px) and (max-width: 315px) {
+  .mat-form-field-infix{
+    width: 1rem !important;
+    font-size: 1rem;
+  }
+}
 
 .sidenav-container {
   flex: 1;
