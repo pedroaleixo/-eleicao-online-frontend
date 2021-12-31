@@ -6,21 +6,23 @@
   justify-content: space-between;
 }
 
-
 .home {
   cursor: pointer;
 }
 
+@media all and (min-width: 510px) {
+  .mat-form-field-infix{
+    width: 15rem !important;
+    font-size: 1rem;
+  }
+ }
 
-.select{
-  font-size: 0.9rem;
-}
-
-
-
-.home {
-  cursor: pointer;
-}
+ @media not all and (min-width: 510px) {
+  .mat-form-field-infix{
+    width: 7rem !important;
+    font-size: 1rem;
+  }
+ }
 
 .sidenav-container {
   flex: 1;
@@ -38,7 +40,5 @@
   }
 }
 
-.select{
-  font-size: 0.9rem;
-}
+
 

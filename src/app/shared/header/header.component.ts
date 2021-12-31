@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -12,6 +12,7 @@ import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.servic
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
   showLogout: boolean = false;
