@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import JSEncrypt from 'jsencrypt';
 
 @Injectable({
   providedIn: 'root'
@@ -6,12 +7,14 @@ import { Injectable } from '@angular/core';
 export class EncryptionService {
   constructor() {}
 
-  encryptVoto(publicKey: any, voto: any) {
+  encryptVoto(publicKey: any, voto: any) : string {
     if (publicKey) {
-      /*const votoString = JSON.stringify(voto);
+      const votoString = JSON.stringify(voto);
       const encryptor = new JSEncrypt();
       encryptor.setPublicKey(publicKey);
-      return encryptor.encrypt(votoString);*/
+      const resp = encryptor.encrypt(votoString);
+      return (resp ? resp : "");
     }
+    return "";
   }
 }

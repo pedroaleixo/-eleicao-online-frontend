@@ -156,9 +156,6 @@ export class VotacaoListComponent implements OnInit {
   }
 
   votar(){
-    console.log(this.escolhas);
-
-
     let idsCandidatos: number[] = [];
     this.escolhas.forEach(e => {
       idsCandidatos = idsCandidatos.concat(e.candidatos.map(c => c.id));
@@ -167,8 +164,8 @@ export class VotacaoListComponent implements OnInit {
     this.votacaoService.obterChavePublica()
     .pipe(take(1))
     .subscribe(chavePublica => {
-      const escolhaEncriptada = "";///this.encryptionService.encryptVoto(chavePublica, idsCandidatos);
-
+      const escolhaEncriptada = this.encryptionService.encryptVoto(chavePublica, idsCandidatos);
+      console.log(escolhaEncriptada);
       this.userService.getUser()
       .pipe(take(1))
       .subscribe(user => {
