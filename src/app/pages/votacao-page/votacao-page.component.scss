@@ -1,0 +1,40 @@
+.table-responsive {
+  display: flex;
+  flex-direction: column;
+
+  @media all and (max-width: 576px) {
+    td, th {
+      font-size: 0.3rem;
+      text-align: center;
+      padding: 0;
+    }
+    button {
+      width: 1rem;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    td, th {
+      font-size: 0.7rem;
+    }
+    button {
+      width: 3rem;
+    }
+  }
+
+  @media all and (min-width: 769px) {
+    td, th {
+      font-size: 0.9rem;
+    }
+    button {
+      width: 6rem;
+    }
+  }
+}
+
+
+
+
+
+
+

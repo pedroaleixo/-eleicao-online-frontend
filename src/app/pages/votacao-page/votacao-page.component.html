@@ -4,8 +4,8 @@
   </mat-card-header>
 
   <mat-card-content>
-    <div class="table-container">
-        <table mat-table matSort matTableResponsive [dataSource]="dataSource">
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
 
           <ng-container matColumnDef="nome">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
