@@ -62,6 +62,31 @@ mat-card-content {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.table-responsive {
+  display: flex;
+  flex-direction: column;
+}
+@media all and (max-width: 576px) {
+  .table-responsive td, .table-responsive th {
+    font-size: 0.3rem!important;
+    text-align: center!important;
+    padding: 0!important;
+ }
+  .table-responsive button {
+    width: 1rem!important;
+ }
+}
+@media all and (max-width: 768px) {
+  .table-responsive td, .table-responsive th {
+    font-size: 0.7rem!important;
+    text-align: center!important;
+    padding: 0!important;
+ }
+  .table-responsive button {
+    width: 3rem!important;
+ }
+}
+
 
 
 

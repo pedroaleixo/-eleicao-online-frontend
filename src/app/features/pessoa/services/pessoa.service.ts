@@ -1,3 +1,4 @@
+import { FiltroPessoa } from './../interfaces/filtro-pessoa';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment';
@@ -21,5 +22,12 @@ export class PessoaService {
   public cadastrar(pessoa: Pessoa): Observable<Pessoa> {
     return this.http.post<Pessoa>(`${API_URL}/pessoa`, pessoa);
   }
+
+  public listarPessoasPorFiltro(filtro: FiltroPessoa, page?:number, size?:number): Observable<any>{
+    if(page && size){
+		  return this.http.post<any>(`${API_URL}/pessoa/filtrar?page=${page}&size=${size}`, filtro);
+    }
+    return this.http.post<any>(`${API_URL}/pessoa/filtrar`, filtro);
+	}
 
 }
