@@ -1,6 +1,35 @@
+<h3>Manter Pessoa</h3>
+<br/>
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Lista de Pessoas</mat-card-title>
+    <mat-card-title>Pesquisa</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="row">
+    <form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+      <div class="row">
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput id="nome" formControlName="nome" [required]="false">
+        </mat-form-field>
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input matInput id="cpf" formControlName="cpf" [textMask]="{mask: cpfMask}" [required]="false">
+        </mat-form-field>
+      </div>
+      <section class="buttons-section" layout="row" layout-align="end center">
+        <button mat-raised-button (click)="limpar()">Limpar</button>
+        <button type="submit" mat-raised-button color="primary">Pesquisar</button>
+      </section>
+    </form>
+  </mat-card-content>
+</mat-card>
+<br/>
+<mat-card>
+  <mat-card-header class="card-header-custom">
+      <mat-card-title>Pessoas</mat-card-title>
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
   </mat-card-header>
   <mat-card-content>
     <div class="table-responsive">
@@ -16,10 +45,15 @@
           <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="actions">
+        <ng-container matColumnDef="acoes">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let pessoa">
-
+              <button mat-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button>
+                <mat-icon>delete</mat-icon>
+              </button>
           </td>
         </ng-container>
 

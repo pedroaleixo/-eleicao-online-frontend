@@ -24,7 +24,7 @@ export class PessoaService {
   }
 
   public listarPessoasPorFiltro(filtro: FiltroPessoa, page?:number, size?:number): Observable<any>{
-    if(page && size){
+    if(page >= 0 && size){
 		  return this.http.post<any>(`${API_URL}/pessoa/filtrar?page=${page}&size=${size}`, filtro);
     }
     return this.http.post<any>(`${API_URL}/pessoa/filtrar`, filtro);

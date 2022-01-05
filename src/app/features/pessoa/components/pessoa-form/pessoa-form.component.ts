@@ -7,6 +7,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { PessoaService } from '../../services/pessoa.service';
 import { somenteNumeros } from 'src/app/core/util/string.util';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { CPF_MASK } from 'src/app/core/util/masks';
 
 @Component({
   selector: 'app-pessoa-form',
@@ -19,7 +20,7 @@ export class PessoaFormComponent implements OnInit {
 
   logged: boolean = false;
 
-  public cpfMask = [ /\d/ , /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/ , /\d/, /\d/, '-', /\d/, /\d/,];
+  cpfMask = CPF_MASK;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private storageService: StorageService, private pessoaService: PessoaService,

@@ -47,7 +47,8 @@ const routes: Routes = [
   },
   {
     path: 'pessoa',
-    component: PessoaListComponent
+    component: PessoaListComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'pessoa/form',
