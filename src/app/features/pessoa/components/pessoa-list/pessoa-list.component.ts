@@ -9,6 +9,9 @@ import { PessoaService } from '../../services/pessoa.service';
 import { CPF_MASK } from 'src/app/core/util/masks';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { somenteNumeros } from 'src/app/core/util/string.util';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-pessoa-list',
@@ -32,6 +35,8 @@ export class PessoaListComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private pessoaService: PessoaService,
+    private snackbarService: SnackbarService,
+    public dialog: MatDialog,
     private router: Router) { }
 
 
@@ -51,7 +56,6 @@ export class PessoaListComponent implements OnInit {
     const nome = this.filtroForm.get('nome').value ? this.filtroForm.get('nome').value : null;
     this.filtro = {cpf, nome};
 
-    console.log(this.filtro)
     this.pessoaService.listarPessoasPorFiltro(this.filtro, this.pageIndex, this.pageSize)
     .subscribe(page => {
       this.dataSource.data = page.content;
@@ -63,6 +67,7 @@ export class PessoaListComponent implements OnInit {
 
   limpar(){
     this.filtroForm.reset();
+    this.pageIndex = 0;
     this.filtrar();
   }
 
@@ -84,8 +89,27 @@ export class PessoaListComponent implements OnInit {
   }
 
 
+  redirecionarParaCadastro(){
+    this.router.navigate(['/pessoa/form']);
+  }
 
+  redirecionarParaEdicao(id:number){
+    this.router.navigate([`/pessoa/form/${id}`]);
+  }
 
+  confirmarRemocao(id:number){
+    const dialogRef = this.dialog.open(DeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.pessoaService.remover(id).subscribe(resp => {
+          window.scroll(0,0);
+          this.snackbarService.success('Pessoa removida com sucesso');
+          this.limpar();
+        });
+      }
+    });
+  }
 
 
 }

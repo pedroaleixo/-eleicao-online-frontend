@@ -1,3 +1,4 @@
+import { DeleteDialogModule } from './../../shared/delete-dialog/delete-dialog.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,7 @@ import { TextMaskModule } from 'angular2-text-mask';
   imports: [
     CommonModule,
     MaterialModule,
+    DeleteDialogModule,
     ReactiveFormsModule,
     TextMaskModule,
     HttpClientModule,  ]

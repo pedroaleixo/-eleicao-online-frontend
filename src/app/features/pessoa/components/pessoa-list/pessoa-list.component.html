@@ -27,7 +27,7 @@
 <mat-card>
   <mat-card-header class="card-header-custom">
       <mat-card-title>Pessoas</mat-card-title>
-      <button mat-button>
+      <button mat-button (click)="redirecionarParaCadastro()">
         <mat-icon>add</mat-icon>
       </button>
   </mat-card-header>
@@ -48,10 +48,10 @@
         <ng-container matColumnDef="acoes">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let pessoa">
-              <button mat-button>
+              <button mat-button (click)="redirecionarParaEdicao(pessoa.id)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-button>
+              <button mat-button (click)="confirmarRemocao(pessoa.id)">
                 <mat-icon>delete</mat-icon>
               </button>
           </td>

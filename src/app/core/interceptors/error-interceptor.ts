@@ -4,17 +4,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { LoadingService } from 'src/app/shared/loading/services/loading.service';
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private snackbarService: SnackbarService){}
+  constructor(private router: Router, private snackbarService: SnackbarService,
+    private loadingService: LoadingService){}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+
+        this.loadingService.stop();
 
         switch (error.status) {
           case 403:

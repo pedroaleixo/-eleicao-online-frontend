@@ -15,12 +15,8 @@ export class PessoaService {
 
   constructor(private http: HttpClient) {}
 
-  public cadastrarPublico(pessoa: Pessoa): Observable<string> {
-    return this.http.post<string>(`${API_URL}/pessoa/publico`, pessoa, {responseType : 'text' as 'json'});
-  }
-
-  public cadastrar(pessoa: Pessoa): Observable<Pessoa> {
-    return this.http.post<Pessoa>(`${API_URL}/pessoa`, pessoa);
+  public buscarPessoaPorId(idPessoa: number) : Observable<Pessoa>{
+    return this.http.get<Pessoa>(`${API_URL}/pessoa/${idPessoa}`);
   }
 
   public listarPessoasPorFiltro(filtro: FiltroPessoa, page?:number, size?:number): Observable<any>{
@@ -29,5 +25,21 @@ export class PessoaService {
     }
     return this.http.post<any>(`${API_URL}/pessoa/filtrar`, filtro);
 	}
+
+  public cadastrarPublico(pessoa: Pessoa): Observable<string> {
+    return this.http.post<string>(`${API_URL}/pessoa/publico`, pessoa, {responseType : 'text' as 'json'});
+  }
+
+  public cadastrar(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.post<Pessoa>(`${API_URL}/pessoa`, pessoa, {responseType : 'text' as 'json'});
+  }
+
+  public atualizar(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.put<Pessoa>(`${API_URL}/pessoa`, pessoa, {responseType : 'text' as 'json'});
+  }
+
+  public remover(idPessoa: number): Observable<void> {
+    return this.http.delete<void>(`${API_URL}/pessoa/${idPessoa}`);
+  }
 
 }

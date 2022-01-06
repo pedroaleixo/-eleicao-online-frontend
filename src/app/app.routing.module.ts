@@ -52,7 +52,12 @@ const routes: Routes = [
   },
   {
     path: 'pessoa/form',
-    component: PessoaListComponent,
+    component: PessoaFormComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'pessoa/form/:id',
+    component: PessoaFormComponent,
     canActivate: [AuthAdminGuard]
   },
   {
