@@ -39,7 +39,7 @@ export class PessoaService {
   }
 
   public remover(idPessoa: number): Observable<void> {
-    return this.http.delete<void>(`${API_URL}/pessoa/${idPessoa}`);
+    return this.http.delete<void>(`${API_URL}/pessoa/${idPessoa}`, {responseType : 'text' as 'json'});
   }
 
 }

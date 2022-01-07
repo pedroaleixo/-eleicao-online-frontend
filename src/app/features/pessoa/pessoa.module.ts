@@ -22,6 +22,6 @@ import { TextMaskModule } from 'angular2-text-mask';
     DeleteDialogModule,
     ReactiveFormsModule,
     TextMaskModule,
-    HttpClientModule,  ]
+    HttpClientModule ]
 })
 export class PessoaModule { }

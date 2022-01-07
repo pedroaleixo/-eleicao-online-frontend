@@ -16,6 +16,7 @@ import { RedirectPageComponent } from './pages/redirect-page/redirect-page.compo
 import { VotacaoPageComponent } from './pages/votacao-page/votacao-page.component';
 import { PessoaFormComponent } from './features/pessoa/components/pessoa-form/pessoa-form.component';
 import { PessoaListComponent } from './features/pessoa/components/pessoa-list/pessoa-list.component';
+import { AdministradorFormComponent } from './features/administrador/components/administrador-form/administrador-form.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,16 @@ const routes: Routes = [
     path: 'administrador',
     component: AdministradorListComponent,
     canActivate: [AuthAdminGuard],
+  },
+  {
+    path: 'administrador/form',
+    component: AdministradorFormComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'administrador/form/:id',
+    component: AdministradorFormComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'public/pessoa/form',
