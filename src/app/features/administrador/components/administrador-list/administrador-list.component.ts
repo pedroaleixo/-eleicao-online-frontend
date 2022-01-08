@@ -111,5 +111,9 @@ export class AdministradorListComponent implements OnInit {
     });
   }
 
+  voltar(){
+    this.router.navigate(['/admin']);
+  }
+
 
 }

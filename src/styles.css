@@ -120,7 +120,10 @@ mat-card-content {
   }
 }
 
-
+.botao-pesquisa{
+  margin-top: 1rem!important;
+  margin-bottom: 1rem!important;
+}
 
 
 

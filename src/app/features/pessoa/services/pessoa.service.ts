@@ -19,6 +19,10 @@ export class PessoaService {
     return this.http.get<Pessoa>(`${API_URL}/pessoa/${idPessoa}`);
   }
 
+  public buscarPessoaPeloCpf(cpf: number) : Observable<Pessoa>{
+    return this.http.get<Pessoa>(`${API_URL}/pessoa/cpf/${cpf}`);
+  }
+
   public listarPessoasPorFiltro(filtro: FiltroPessoa, page?:number, size?:number): Observable<any>{
     if(page >= 0 && size){
 		  return this.http.post<any>(`${API_URL}/pessoa/filtrar?page=${page}&size=${size}`, filtro);

@@ -111,5 +111,9 @@ export class PessoaListComponent implements OnInit {
     });
   }
 
+  voltar(){
+    this.router.navigate(['/admin']);
+  }
+
 
 }

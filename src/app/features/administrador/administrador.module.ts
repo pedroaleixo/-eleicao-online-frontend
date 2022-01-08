@@ -7,6 +7,7 @@ import { DeleteDialogModule } from 'src/app/shared/delete-dialog/delete-dialog.m
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { SharedModule } from 'src/app/shared.module';
 
 
 
@@ -16,12 +17,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     AdministradorFormComponent
   ],
   imports: [
-    CommonModule,
-    MaterialModule,
-    DeleteDialogModule,
-    ReactiveFormsModule,
-    TextMaskModule,
-    HttpClientModule
+    SharedModule
   ]
 })
 export class AdministradorModule { }

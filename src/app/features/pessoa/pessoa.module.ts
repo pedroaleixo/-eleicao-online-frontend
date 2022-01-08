@@ -7,6 +7,7 @@ import { PessoaListComponent } from './components/pessoa-list/pessoa-list.compon
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { SharedModule } from 'src/app/shared.module';
 
 
 
@@ -17,11 +18,6 @@ import { TextMaskModule } from 'angular2-text-mask';
     PessoaFormComponent
   ],
   imports: [
-    CommonModule,
-    MaterialModule,
-    DeleteDialogModule,
-    ReactiveFormsModule,
-    TextMaskModule,
-    HttpClientModule ]
+    SharedModule ]
 })
 export class PessoaModule { }

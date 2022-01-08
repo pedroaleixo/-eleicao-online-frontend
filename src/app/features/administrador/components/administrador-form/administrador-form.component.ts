@@ -9,6 +9,8 @@ import { StorageService } from 'src/app/core/services/storage.service';
 import { CPF_MASK } from 'src/app/core/util/masks';
 import { Administrador } from '../../interfaces/administrador';
 import { AdministradorService } from '../../services/administrador.service';
+import { PessoaService } from 'src/app/features/pessoa/services/pessoa.service';
+import { Pessoa } from 'src/app/features/pessoa/interfaces/pessoa';
 
 @Component({
   selector: 'app-administrador-form',
@@ -18,12 +20,13 @@ import { AdministradorService } from '../../services/administrador.service';
 export class AdministradorFormComponent implements OnInit {
 
   administrador:Administrador;
+  pessoa:Pessoa;
   administradorForm!: FormGroup;
   logged: boolean = false;
   cpfMask = CPF_MASK;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private storageService: StorageService, private administradorService: AdministradorService,
+    private pessoaService: PessoaService, private administradorService: AdministradorService,
     private snackbarService: SnackbarService, private router: Router,
     private route: ActivatedRoute) {}
 
@@ -44,6 +47,7 @@ export class AdministradorFormComponent implements OnInit {
     if(id){
       this.administradorService.buscarAdministradorPorId(id).subscribe(a => {
         this.administrador = a;
+        this.pessoa = a.pessoa;
         this.administradorForm.get('cpf').setValue(a.pessoa.cpf+"");
         this.administradorForm.get('nome').setValue(a.pessoa.nome);
         this.administradorForm.get('dataNascimento').setValue(a.pessoa.dataNascimento);
@@ -68,8 +72,11 @@ export class AdministradorFormComponent implements OnInit {
     if (!this.administradorForm.valid) {
       return;
     }
-    let administradorDTO = {...this.administradorForm.value};
-    administradorDTO.cpf = somenteNumeros(administradorDTO.cpf);
+    let administradorDTO = {id: null, pessoa: {...this.administradorForm.value}};
+    if(this.pessoa){
+      administradorDTO.pessoa.id = this.pessoa.id;
+    }
+    administradorDTO.pessoa.cpf = somenteNumeros(administradorDTO.pessoa.cpf);
 
 
     if(this.administrador){
@@ -85,6 +92,25 @@ export class AdministradorFormComponent implements OnInit {
       });
     }
 
+  }
+
+  pesquisar(event){
+    event.preventDefault();
+    this.pessoaService.buscarPessoaPeloCpf(
+      somenteNumeros(this.administradorForm.get('cpf').value))
+      .subscribe(p => {
+        if(p){
+        this.pessoa = p;
+        this.administradorForm.get('nome').setValue(p.nome);
+        this.administradorForm.get('dataNascimento').setValue(p.dataNascimento);
+        this.administradorForm.get('genero').setValue(p.genero);
+        this.administradorForm.get('endereco').setValue(p.endereco);
+        this.administradorForm.get('email').setValue(p.email);
+        this.administradorForm.get('telefone').setValue(p.telefone);
+        } else {
+          this.pessoa = null;
+        }
+      });
   }
 
   voltar(){

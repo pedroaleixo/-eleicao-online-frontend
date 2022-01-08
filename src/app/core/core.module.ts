@@ -4,7 +4,9 @@ import { RouterModule } from '@angular/router';
 import { LoadingModule } from '../shared/loading/loading.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [CommonModule, RouterModule, LoadingModule],
   providers: [],
 })

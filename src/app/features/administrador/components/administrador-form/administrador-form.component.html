@@ -1,9 +1,10 @@
+<form [formGroup]="administradorForm" (ngSubmit)="salvar()">
 <mat-card class="mat-elevation-z4">
   <mat-card-header>
     <mat-card-title>Cadastro de Administrador</mat-card-title>
   </mat-card-header>
   <mat-card-content fxLayout="column">
-      <form [formGroup]="administradorForm" (ngSubmit)="salvar()">
+
         <div class="row">
           <mat-form-field class="col-sm-4" appearance="outline">
             <mat-label>CPF</mat-label>
@@ -12,6 +13,9 @@
               <span *ngIf="administradorForm.controls.cpf.errors?.required">Campo obrigatório.</span>
             </mat-error>
           </mat-form-field>
+          <div class="col-sm-1">
+            <button class="botao-pesquisa" mat-raised-button color="primary" (click)="pesquisar($event)" [disabled]="administradorForm.controls.cpf.invalid">Pesquisar</button>
+          </div>
         </div>
         <div class="row">
           <mat-form-field class="col-sm-8" appearance="outline">
@@ -58,13 +62,14 @@
             <input matInput id="telefone" formControlName="telefone" [required]="false">
           </mat-form-field>
         </div>
-        <section class="buttons-section" layout="row" layout-align="end center">
-          <button class="col-sm-1" mat-raised-button (click)="voltar()">Voltar</button>
-          <button type="submit" [disabled]="!administradorForm.valid" class="col-sm-1" mat-raised-button color="primary">Salvar</button>
-        </section>
-      </form>
+
   </mat-card-content>
 </mat-card>
+<section class="buttons-section" layout="row" layout-align="end center">
+  <button mat-raised-button (click)="voltar()">Voltar</button>
+  <button type="submit" [disabled]="!administradorForm.valid" mat-raised-button color="primary">Salvar</button>
+</section>
+</form>
 
 
 
