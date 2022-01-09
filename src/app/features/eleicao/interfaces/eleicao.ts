@@ -6,14 +6,14 @@ import { Configuracao } from './configuracao';
 
 export interface Eleicao {
   id:number;
-  nome:string;
-	instituicao:string;
-  dataHoraInicio:Date;
-	dataHoraFim:Date;
-  situacao:number;
-	cargos: Cargo[];
-	comissaoEleitoral:ComissaoEleitoral;
-	configuracao:Configuracao;
-	candidatos: Candidato[];
-	eleitores: Eleitor[];
+  nome?:string;
+	instituicao?:string;
+  dataHoraInicio?:Date;
+	dataHoraFim?:Date;
+  situacao?:number;
+	cargos?: Cargo[];
+	comissaoEleitoral?:ComissaoEleitoral;
+	configuracao?:Configuracao;
+	candidatos?: Candidato[];
+	eleitores?: Eleitor[];
 }

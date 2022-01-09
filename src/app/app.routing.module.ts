@@ -17,6 +17,7 @@ import { VotacaoPageComponent } from './pages/votacao-page/votacao-page.componen
 import { PessoaFormComponent } from './features/pessoa/components/pessoa-form/pessoa-form.component';
 import { PessoaListComponent } from './features/pessoa/components/pessoa-list/pessoa-list.component';
 import { AdministradorFormComponent } from './features/administrador/components/administrador-form/administrador-form.component';
+import { EleitorFormComponent } from './features/eleitor/components/eleitor-form/eleitor-form.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,16 @@ const routes: Routes = [
     path: 'eleitor',
     component: EleitorListComponent,
     canActivate: [AuthAdminGuard, EleicaoAtivaGuard],
+  },
+  {
+    path: 'eleitor/form',
+    component: EleitorFormComponent,
+    canActivate: [AuthAdminGuard, EleicaoAtivaGuard]
+  },
+  {
+    path: 'eleitor/form/:id',
+    component: EleitorFormComponent,
+    canActivate: [AuthAdminGuard, EleicaoAtivaGuard]
   },
   {
     path: 'login-votacao',

@@ -26,15 +26,15 @@ export class AdministradorService {
 	}
 
 
-  public cadastrar(pessoa: Administrador): Observable<Administrador> {
-    return this.http.post<Administrador>(`${API_URL}/administrador`, pessoa, {responseType : 'text' as 'json'});
+  public cadastrar(administrador: Administrador): Observable<Administrador> {
+    return this.http.post<Administrador>(`${API_URL}/administrador`, administrador, {responseType : 'text' as 'json'});
   }
 
-  public atualizar(pessoa: Administrador): Observable<Administrador> {
-    return this.http.put<Administrador>(`${API_URL}/administrador`, pessoa, {responseType : 'text' as 'json'});
+  public atualizar(administrador: Administrador): Observable<Administrador> {
+    return this.http.put<Administrador>(`${API_URL}/administrador`, administrador, {responseType : 'text' as 'json'});
   }
 
-  public remover(idPessoa: number): Observable<void> {
-    return this.http.delete<void>(`${API_URL}/administrador/${idPessoa}`, {responseType : 'text' as 'json'});
+  public remover(idAdministrador: number): Observable<void> {
+    return this.http.delete<void>(`${API_URL}/administrador/${idAdministrador}`, {responseType : 'text' as 'json'});
   }
 }

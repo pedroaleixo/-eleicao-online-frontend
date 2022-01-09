@@ -1,9 +1,84 @@
+<h3>Manter Eleitor</h3>
+<br/>
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Lista de Eleitores</mat-card-title>
+    <mat-card-title>Pesquisa</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <div class="container">
+  <mat-card-content fxLayout="row">
+    <form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+      <div class="row">
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput id="nome" formControlName="nome" [required]="false">
+        </mat-form-field>
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input matInput id="cpf" formControlName="cpf" [textMask]="{mask: cpfMask}" [required]="false">
+        </mat-form-field>
       </div>
+      <section class="buttons-section" layout="row" layout-align="end center">
+        <button mat-raised-button (click)="limpar()">Limpar</button>
+        <button type="submit" mat-raised-button color="primary">Pesquisar</button>
+      </section>
+    </form>
   </mat-card-content>
 </mat-card>
+<br/>
+<mat-card>
+  <mat-card-header class="card-header-custom">
+      <mat-card-title>Eleitores</mat-card-title>
+      <button mat-button (click)="redirecionarParaCadastro()">
+        <mat-icon>add</mat-icon>
+      </button>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.pessoa.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cpf">
+          <th mat-header-cell *matHeaderCellDef> CPF </th>
+          <td mat-cell *matCellDef="let element"> {{element.pessoa.cpf | cpf}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let eleitor">
+              <button mat-button (click)="redirecionarParaEdicao(eleitor.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button (click)="confirmarRemocao(eleitor.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="9999">
+            Não há eleitores disponíveis
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Selecione página de elementos"
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     (page)="pageEvent = buscarEleitores($event)">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+<section class="buttons-section" layout="row" layout-align="end center">
+  <button mat-raised-button (click)="voltar()">Voltar</button>
+</section>

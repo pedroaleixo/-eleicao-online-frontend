@@ -3,7 +3,7 @@ import { Pessoa } from '../../pessoa/interfaces/pessoa';
 
 export interface Eleitor {
 	id:number;
-	dataHoraVotou:Date;
+	dataHoraVotou?:Date;
   pessoa:Pessoa;
 	eleicao:Eleicao;
 }

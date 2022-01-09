@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EleitorListComponent } from './components/eleitor-list/eleitor-list.component';
 import { EleitorFormComponent } from './components/eleitor-form/eleitor-form.component';
 import { MaterialModule } from 'src/app/material.module';
+import { SharedModule } from 'src/app/shared.module';
 
 
 
@@ -12,8 +13,7 @@ import { MaterialModule } from 'src/app/material.module';
     EleitorFormComponent
   ],
   imports: [
-    CommonModule,
-    MaterialModule
+    SharedModule
   ]
 })
 export class EleitorModule { }
