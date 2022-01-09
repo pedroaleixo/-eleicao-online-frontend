@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
 import { Candidato } from '../../candidato/interfaces/candidato';
+import { Cargo } from '../interfaces/cargo';
 import { Eleicao } from '../interfaces/eleicao';
 
 const API_URL = environment.apiUrl+'/api';
@@ -38,5 +39,10 @@ export class EleicaoService {
   public listarEleicoesPorPessoaMembroComissao(idPessoa:number): Observable<Eleicao[]>{
     return this.http.get<Eleicao[]>(`${API_URL}/eleicao/membro-comissao/${idPessoa}`);
   }
+
+  public listarCargosEleicao(idEleicao:number): Observable<Cargo[]>{
+    return this.http.get<Cargo[]>(`${API_URL}/eleicao/${idEleicao}/cargos`);
+	}
+
 
 }

@@ -5,10 +5,10 @@ import { Pessoa } from '../../pessoa/interfaces/pessoa';
 
 export interface Candidato {
   id:number;
-  numero:number;
-  votos:number;
+  numero?:number;
+  votos?:number;
   pessoa:Pessoa | null;
   eleicao:Eleicao;
-  cargo:Cargo;
-  acoes:any;
+  cargo?:Cargo;
+  acoes?:any;
 }
