@@ -19,6 +19,7 @@ import { PessoaListComponent } from './features/pessoa/components/pessoa-list/pe
 import { AdministradorFormComponent } from './features/administrador/components/administrador-form/administrador-form.component';
 import { EleitorFormComponent } from './features/eleitor/components/eleitor-form/eleitor-form.component';
 import { CandidatoFormComponent } from './features/candidato/components/candidato-form/candidato-form.component';
+import { EleicaoFormComponent } from './features/eleicao/components/eleicao-form/eleicao-form.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,16 @@ const routes: Routes = [
     path: 'eleicao',
     component: EleicaoListComponent,
     canActivate: [AuthAdminGuard],
+  },
+  {
+    path: 'eleicao/form',
+    component: EleicaoFormComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'eleicao/form/:id',
+    component: EleicaoFormComponent,
+    canActivate: [AuthAdminGuard]
   },
   {
     path: 'candidato',

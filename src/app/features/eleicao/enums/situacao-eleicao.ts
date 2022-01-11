@@ -1,5 +1,5 @@
 export enum SituacaoEleicao {
-  CADASTRADA = 0 ,
+  CADASTRADA = 0,
 	INICIADA = 1,
 	EM_PROCESSAMENTO = 2,
 	PROCESSADA = 3,

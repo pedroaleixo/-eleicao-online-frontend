@@ -1,1 +1,93 @@
-<p>eleicao-form works!</p>
+<form [formGroup]="eleicaoForm" (ngSubmit)="salvar()">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title>Cadastro de Eleição</mat-card-title>
+    </mat-card-header>
+        <mat-card-content fxLayout="column">
+          <div class="row">
+            <mat-form-field class="col-sm-6" appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput id="nome" formControlName="nome" [required]="true">
+              <mat-error *ngIf="eleicaoForm.controls.nome.touched && eleicaoForm.controls.nome.invalid">
+                <span *ngIf="eleicaoForm.controls.nome.errors?.required">Campo obrigatório.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-sm-6" appearance="outline">
+              <mat-label>Instituição</mat-label>
+              <input matInput id="instituicao" formControlName="instituicao" [required]="true">
+              <mat-error *ngIf="eleicaoForm.controls.instituicao.touched && eleicaoForm.controls.instituicao.invalid">
+                <span *ngIf="eleicaoForm.controls.instituicao.errors?.required">Campo obrigatório.</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="col-sm-3" appearance="outline">
+              <mat-label>Início</mat-label>
+              <input matInput id="dataInicio" formControlName="dataInicio" [matDatepicker]="pickerInicio" [required]="true">
+              <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+              <mat-datepicker #pickerInicio></mat-datepicker>
+              <mat-error *ngIf="eleicaoForm.controls.dataInicio.touched && eleicaoForm.controls.dataInicio.invalid">
+                <span *ngIf="eleicaoForm.controls.dataInicio.errors?.required">Campo obrigatório.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-sm-1" appearance="outline">
+              <input matInput id="horaInicio" formControlName="horaInicio" [ngxTimepicker]="horaInicio" [format]="24" [required]="false" />
+              <ngx-material-timepicker #horaInicio [minutesGap]="10"></ngx-material-timepicker>
+            </mat-form-field>
+            <mat-form-field class="col-sm-3" appearance="outline">
+              <mat-label>Fim</mat-label>
+              <input matInput id="dataFim" formControlName="dataFim" [matDatepicker]="pickerFim" [required]="true">
+              <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFim></mat-datepicker>
+              <mat-error *ngIf="eleicaoForm.controls.dataFim.touched && eleicaoForm.controls.dataFim.invalid">
+                <span *ngIf="eleicaoForm.controls.dataFim.errors?.required">Campo obrigatório.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-sm-1" appearance="outline">
+              <input matInput id="horaFim" formControlName="horaFim" [ngxTimepicker]="horaFim" [format]="24" [required]="false" />
+              <ngx-material-timepicker #horaFim [minutesGap]="10"></ngx-material-timepicker>
+            </mat-form-field>
+            <mat-form-field class="col-sm-4" appearance="outline" *ngIf="eleicao">
+              <mat-label>Situação</mat-label>
+              <input matInput id="situacao" formControlName="situacao" [required]="false" [readonly]="true">
+            </mat-form-field>
+          </div>
+          <div class="row">
+              <mat-card class="col-sm-5 sub-card">
+                <mat-card-header class="card-header-custom">
+                  <mat-card-title>Cargos</mat-card-title>
+                  <button mat-button>
+                    <mat-icon>add</mat-icon>
+                  </button>
+              </mat-card-header>
+                <mat-card-content>
+                  <div class="table-responsive">
+
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-card class="col-sm-5 sub-card">
+                <mat-card-header class="card-header-custom">
+                  <mat-card-title>Comissão eleitoral</mat-card-title>
+                  <button mat-button>
+                    <mat-icon>add</mat-icon>
+                  </button>
+              </mat-card-header>
+                <mat-card-content>
+                  <div class="table-responsive">
+
+                  </div>
+                </mat-card-content>
+              </mat-card>
+          </div>
+    </mat-card-content>
+  </mat-card>
+  <section class="buttons-section" layout="row" layout-align="end center">
+    <button mat-raised-button (click)="voltar()">Voltar</button>
+    <button type="submit" [disabled]="!eleicaoForm.valid" mat-raised-button color="primary">Salvar</button>
+  </section>
+  </form>
+
+
+
+

@@ -1,9 +1,125 @@
+<h3>Manter Eleição</h3>
+<br/>
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Lista de Eleições</mat-card-title>
+    <mat-card-title>Pesquisa</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <div class="container">
+  <mat-card-content fxLayout="row">
+    <form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+      <div class="row">
+        <mat-form-field class="col-sm-6" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput id="nome" formControlName="nome" [required]="false">
+        </mat-form-field>
+        <mat-form-field class="col-sm-6" appearance="outline">
+          <mat-label>Instituição</mat-label>
+          <input matInput id="instituicao" formControlName="instituicao" [required]="false">
+        </mat-form-field>
       </div>
+      <div class="row">
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>Início</mat-label>
+          <input matInput id="dataHoraInicio" formControlName="dataHoraInicio" [matDatepicker]="pickerInicio" [required]="false">
+          <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>Fim</mat-label>
+          <input matInput id="dataHoraFim" formControlName="dataHoraFim" [matDatepicker]="pickerFim" [required]="false">
+          <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFim></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-4" appearance="outline">
+          <mat-label>Situação</mat-label>
+          <mat-select formControlName="situacao" [required]="false" disableOptionCentering placeholder="Selecione" >
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let situacao of situacoes" [value]="situacao.value">
+              {{situacao.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <section class="buttons-section" layout="row" layout-align="end center">
+        <button mat-raised-button (click)="limpar()">Limpar</button>
+        <button type="submit" mat-raised-button color="primary">Pesquisar</button>
+      </section>
+    </form>
   </mat-card-content>
 </mat-card>
+<br/>
+<mat-card>
+  <mat-card-header class="card-header-custom">
+      <mat-card-title>Eleições</mat-card-title>
+      <button mat-button (click)="redirecionarParaCadastro()">
+        <mat-icon>add</mat-icon>
+      </button>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="instituicao">
+          <th mat-header-cell *matHeaderCellDef> Instituição </th>
+          <td mat-cell *matCellDef="let element"> {{element.instituicao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHoraInicio">
+          <th mat-header-cell *matHeaderCellDef> Início </th>
+          <td mat-cell *matCellDef="let element"> {{element.dataHoraInicio | date: 'dd/MM/yyyy HH:mm:SS'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHoraFim">
+          <th mat-header-cell *matHeaderCellDef> Fim </th>
+          <td mat-cell *matCellDef="let element"> {{element.dataHoraFim | date: 'dd/MM/yyyy HH:mm:SS'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="situacao">
+          <th mat-header-cell *matHeaderCellDef> Situação </th>
+          <td mat-cell *matCellDef="let element"> {{getSituacaoLabel(element.situacao)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let eleicao">
+              <button mat-button (click)="redirecionarParaEdicao(eleicao.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button (click)="confirmarRemocao(eleicao.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-button (click)="redirecionarParaCofiguracao(eleicao.id)">
+                <mat-icon>construction</mat-icon>
+              </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="9999">
+            Não há eleições disponíveis
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Selecione página de elementos"
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     (page)="pageEvent = buscarEleicoes($event)">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+<section class="buttons-section" layout="row" layout-align="end center">
+  <button mat-raised-button (click)="voltar()">Voltar</button>
+</section>
