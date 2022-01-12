@@ -10,3 +10,8 @@ export function getValoresSituacaoEleicao(): any[] {
     {value: SituacaoEleicao.PROCESSADA.valueOf(), label: 'Processada'}
   ]
 }
+
+
+export function getValorSituacaoEleicao(label:string): any[] {
+  return getValoresSituacaoEleicao().find(situacao => situacao.label === label).value;
+}

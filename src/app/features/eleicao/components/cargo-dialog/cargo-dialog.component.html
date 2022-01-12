@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Adicionar Cargo</h2>
+<form [formGroup]="cargoDialogForm" (ngSubmit)="adicionar()">
+
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput id="nome" formControlName="nome" [required]="true">
+      <mat-error *ngIf="cargoDialogForm.controls.nome.touched && cargoDialogForm.controls.nome.invalid">
+        <span *ngIf="cargoDialogForm.controls.nome.errors?.required">Campo obrigatório.</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-sm-6" appearance="outline">
+      <mat-label>Escolhas</mat-label>
+      <input matInput type="number" id="escolhas" formControlName="escolhas" [required]="true">
+      <mat-error *ngIf="cargoDialogForm.controls.escolhas.touched && cargoDialogForm.controls.escolhas.invalid">
+        <span *ngIf="cargoDialogForm.controls.escolhas.errors?.required">Campo obrigatório.</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button type="submit" mat-button mat-raised-button color="primary" cdkFocusInitial>Adicionar</button>
+</mat-dialog-actions>
+</form>

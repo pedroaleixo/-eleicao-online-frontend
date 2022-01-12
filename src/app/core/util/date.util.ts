@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
-export function addTimeToDate(newdate) {
+export function addTimeToDate(date, time) : Date {  
   const _ = moment();
-  const date = moment(newdate).add({hours: _.hour(), minutes:_.minute() , seconds:_.second()})
-  return date.toDate();
+  const completeDate = moment(moment(date).format('YYYY-MM-DD') +" "+ time)
+  return completeDate.toDate();
 }

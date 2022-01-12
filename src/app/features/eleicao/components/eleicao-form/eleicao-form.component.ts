@@ -8,8 +8,11 @@ import { UserService } from 'src/app/core/services/user.service';
 import { Eleicao } from '../../interfaces/eleicao';
 import { EleicaoService } from '../../services/eleicao.service';
 import { Cargo } from '../../interfaces/cargo';
-import { getValoresSituacaoEleicao } from 'src/app/core/util/enum.util';
+import { getValoresSituacaoEleicao, getValorSituacaoEleicao } from 'src/app/core/util/enum.util';
 import { addTimeToDate } from 'src/app/core/util/date.util';
+import { MatDialog } from '@angular/material/dialog';
+import { CargoDialogComponent } from '../cargo-dialog/cargo-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-eleicao-form',
@@ -19,14 +22,15 @@ import { addTimeToDate } from 'src/app/core/util/date.util';
 export class EleicaoFormComponent implements OnInit {
 
   eleicao:Eleicao;
-  cargos: Cargo[] = [];
   comissaoEleitoral: ComissaoEleitoral;
   eleicaoForm!: FormGroup;
   logged: boolean = false;
+  displayedColumnsCargo: string[] = ['nome','escolhas','acoes'];
+  dataSourceCargo = new MatTableDataSource<Cargo>();
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private eleicaoService: EleicaoService, private snackbarService: SnackbarService,
-    private router: Router, private route: ActivatedRoute) {}
+    public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
 
@@ -47,15 +51,18 @@ export class EleicaoFormComponent implements OnInit {
     if(id){
       this.eleicaoService.buscarEleicaoPorId(id).subscribe(e => {
         this.eleicao = e;
+        const dataHoraInicio = new Date(e.dataHoraInicio);
+        const dataHoraFim = new Date(e.dataHoraFim);
         this.eleicaoForm.get('nome').setValue(e.nome);
         this.eleicaoForm.get('instituicao').setValue(e.instituicao);
         this.eleicaoForm.get('dataInicio').setValue(e.dataHoraInicio);
         this.eleicaoForm.get('dataFim').setValue(e.dataHoraFim);
-        this.eleicaoForm.get('horaInicio').setValue(e.dataHoraInicio);
-        this.eleicaoForm.get('horaFim').setValue(e.dataHoraFim);
+        this.eleicaoForm.get('horaInicio').setValue(dataHoraInicio.getHours()+":"+dataHoraInicio.getMinutes());
+        this.eleicaoForm.get('horaFim').setValue(dataHoraFim.getHours()+":"+dataHoraFim.getMinutes());
         this.eleicaoForm.get('situacao').setValue(this.getSituacaoLabel(Number(e.situacao)));
-        this.eleicaoForm.get('cargos').setValue(e.cargos);
         this.eleicaoForm.get('comissaoEleitoral').setValue(e.comissaoEleitoral);
+
+        this.dataSourceCargo.data = e.cargos;
       });
     }
 
@@ -73,14 +80,16 @@ export class EleicaoFormComponent implements OnInit {
     if (!this.eleicaoForm.valid) {
       return;
     }
+
     let eleicaoDTO = {...this.eleicaoForm.value,
-      dataHoraInicio: addTimeToDate(this.eleicaoForm.get('dataInicio').value),
-      dataHoraFim: addTimeToDate(this.eleicaoForm.get('dataFim').value),
-      cargos: this.cargos,
+      dataHoraInicio: addTimeToDate(this.eleicaoForm.get('dataInicio').value, this.eleicaoForm.get('horaInicio').value),
+      dataHoraFim: addTimeToDate(this.eleicaoForm.get('dataFim').value, this.eleicaoForm.get('horaFim').value),
+      cargos: this.dataSourceCargo.data,
       comissaoEleitoral: this.comissaoEleitoral};
 
     if(this.eleicao){
       eleicaoDTO.id = this.eleicao.id;
+      eleicaoDTO.situacao = getValorSituacaoEleicao(this.eleicaoForm.get('situacao').value);
       this.eleicaoService.atualizar(eleicaoDTO).subscribe(resp =>{
         this.router.navigate(['/eleicao']);
         this.snackbarService.success('Eleicao atualizada com sucesso');
@@ -92,6 +101,43 @@ export class EleicaoFormComponent implements OnInit {
       });
     }
 
+  }
+
+  abrirModalCargos(event){
+    event.preventDefault();
+    const dialogRef = this.dialog.open(CargoDialogComponent, {
+      data: {cargos: this.dataSourceCargo.data}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.dataSourceCargo.data = result.data;
+      }
+    });
+  }
+
+  redirecionarParaEdicaoCargo(event, nomeCargo:string){
+    event.preventDefault();
+    const dialogRef = this.dialog.open(CargoDialogComponent, {
+      data: {
+        cargos: this.dataSourceCargo.data,
+        cargoEditado: this.dataSourceCargo.data.find(c => c.nome === nomeCargo) }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.dataSourceCargo.data = result.data;
+      }
+    });
+  }
+
+  removerCargo(event, nomeCargo:string){
+    event.preventDefault();
+    this.dataSourceCargo.data = this.dataSourceCargo.data.filter(c => c.nome != nomeCargo);
+  }
+
+  abrirModalComissao(event){
+    event.preventDefault();
   }
 
   getSituacaoLabel(value:number){

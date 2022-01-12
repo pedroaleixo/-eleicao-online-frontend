@@ -23,7 +23,7 @@
           <div class="row">
             <mat-form-field class="col-sm-3" appearance="outline">
               <mat-label>Início</mat-label>
-              <input matInput id="dataInicio" formControlName="dataInicio" [matDatepicker]="pickerInicio" [required]="true">
+              <input matInput readonly id="dataInicio" formControlName="dataInicio" [matDatepicker]="pickerInicio" [required]="true">
               <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
               <mat-datepicker #pickerInicio></mat-datepicker>
               <mat-error *ngIf="eleicaoForm.controls.dataInicio.touched && eleicaoForm.controls.dataInicio.invalid">
@@ -31,12 +31,12 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="col-sm-1" appearance="outline">
-              <input matInput id="horaInicio" formControlName="horaInicio" [ngxTimepicker]="horaInicio" [format]="24" [required]="false" />
-              <ngx-material-timepicker #horaInicio [minutesGap]="10"></ngx-material-timepicker>
+              <input matInput readonly id="horaInicio" formControlName="horaInicio" [ngxTimepicker]="horaInicio" [format]="24" [required]="false" />
+              <ngx-material-timepicker #horaInicio ></ngx-material-timepicker>
             </mat-form-field>
             <mat-form-field class="col-sm-3" appearance="outline">
               <mat-label>Fim</mat-label>
-              <input matInput id="dataFim" formControlName="dataFim" [matDatepicker]="pickerFim" [required]="true">
+              <input matInput readonly id="dataFim" formControlName="dataFim" [matDatepicker]="pickerFim" [required]="true">
               <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
               <mat-datepicker #pickerFim></mat-datepicker>
               <mat-error *ngIf="eleicaoForm.controls.dataFim.touched && eleicaoForm.controls.dataFim.invalid">
@@ -44,8 +44,8 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="col-sm-1" appearance="outline">
-              <input matInput id="horaFim" formControlName="horaFim" [ngxTimepicker]="horaFim" [format]="24" [required]="false" />
-              <ngx-material-timepicker #horaFim [minutesGap]="10"></ngx-material-timepicker>
+              <input matInput readonly id="horaFim" formControlName="horaFim" [ngxTimepicker]="horaFim" [format]="24" [required]="false" />
+              <ngx-material-timepicker #horaFim ></ngx-material-timepicker>
             </mat-form-field>
             <mat-form-field class="col-sm-4" appearance="outline" *ngIf="eleicao">
               <mat-label>Situação</mat-label>
@@ -56,20 +56,53 @@
               <mat-card class="col-sm-5 sub-card">
                 <mat-card-header class="card-header-custom">
                   <mat-card-title>Cargos</mat-card-title>
-                  <button mat-button>
+                  <button mat-button (click)="abrirModalCargos($event)">
                     <mat-icon>add</mat-icon>
                   </button>
               </mat-card-header>
                 <mat-card-content>
                   <div class="table-responsive">
+                    <table mat-table [dataSource]="dataSourceCargo">
 
+                      <ng-container matColumnDef="nome">
+                        <th mat-header-cell *matHeaderCellDef> Nome </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="escolhas">
+                        <th mat-header-cell *matHeaderCellDef> Escolhas </th>
+                        <td mat-cell *matCellDef="let element"> {{element.escolhas}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="acoes">
+                        <th mat-header-cell *matHeaderCellDef> Ações </th>
+                        <td mat-cell *matCellDef="let cargo">
+                            <button mat-button (click)="redirecionarParaEdicaoCargo($event, cargo.nome)">
+                              <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-button (click)="removerCargo($event, cargo.nome)">
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                      </ng-container>
+
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsCargo; sticky: true"></tr>
+                      <tr mat-row *matRowDef="let element; columns: displayedColumnsCargo;"></tr>
+
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="9999">
+                          Não há cargos
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                 </mat-card-content>
               </mat-card>
               <mat-card class="col-sm-5 sub-card">
                 <mat-card-header class="card-header-custom">
                   <mat-card-title>Comissão eleitoral</mat-card-title>
-                  <button mat-button>
+                  <button mat-button (click)="abrirModalComissao($event)">
                     <mat-icon>add</mat-icon>
                   </button>
               </mat-card-header>

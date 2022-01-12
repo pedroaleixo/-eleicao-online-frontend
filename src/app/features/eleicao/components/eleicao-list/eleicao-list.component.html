@@ -17,17 +17,25 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Início</mat-label>
-          <input matInput id="dataHoraInicio" formControlName="dataHoraInicio" [matDatepicker]="pickerInicio" [required]="false">
+          <input matInput readonly id="dataInicio" formControlName="dataInicio" [matDatepicker]="pickerInicio" [required]="false">
           <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
           <mat-datepicker #pickerInicio></mat-datepicker>
         </mat-form-field>
-        <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-form-field class="col-sm-1" appearance="outline">
+          <input matInput readonly id="horaInicio" formControlName="horaInicio" [ngxTimepicker]="horaInicio" [format]="24" [required]="false" />
+          <ngx-material-timepicker #horaInicio ></ngx-material-timepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Fim</mat-label>
-          <input matInput id="dataHoraFim" formControlName="dataHoraFim" [matDatepicker]="pickerFim" [required]="false">
+          <input matInput readonly id="dataFim" formControlName="dataFim" [matDatepicker]="pickerFim" [required]="false">
           <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
           <mat-datepicker #pickerFim></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-1" appearance="outline">
+          <input matInput readonly id="horaFim" formControlName="horaFim" [ngxTimepicker]="horaFim" [format]="24" [required]="false" />
+          <ngx-material-timepicker #horaFim ></ngx-material-timepicker>
         </mat-form-field>
         <mat-form-field class="col-sm-4" appearance="outline">
           <mat-label>Situação</mat-label>

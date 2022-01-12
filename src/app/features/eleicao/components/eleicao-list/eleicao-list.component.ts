@@ -47,8 +47,10 @@ export class EleicaoListComponent implements OnInit {
     this.filtroForm = this.formBuilder.group({
       nome: [''],
       instituicao: [''],
-      dataHoraInicio: [''],
-      dataHoraFim: [''],
+      dataInicio: [''],
+      dataFim: [''],
+      horaInicio: [''],
+      horaFim: [''],
       situacao: ['']
     });
 
@@ -58,8 +60,8 @@ export class EleicaoListComponent implements OnInit {
   filtrar(){
     const nome = this.filtroForm.get('nome').value ? this.filtroForm.get('nome').value : null;
     const instituicao = this.filtroForm.get('instituicao').value ? this.filtroForm.get('instituicao').value : null;
-    const dataHoraInicio = this.filtroForm.get('dataHoraInicio').value ? addTimeToDate(this.filtroForm.get('dataHoraInicio').value) : null;
-    const dataHoraFim = this.filtroForm.get('dataHoraFim').value ? addTimeToDate(this.filtroForm.get('dataHoraFim').value) : null;
+    const dataHoraInicio = this.filtroForm.get('dataInicio').value ? addTimeToDate(this.filtroForm.get('dataInicio').value, this.filtroForm.get('horaInicio').value) : null;
+    const dataHoraFim = this.filtroForm.get('dataFim').value ? addTimeToDate(this.filtroForm.get('dataFim').value, this.filtroForm.get('horaFim').value) : null;
     const situacao = this.filtroForm.get('situacao').value != null ? this.filtroForm.get('situacao').value : null;
     this.filtro = {nome, instituicao, dataHoraInicio, dataHoraFim, situacao};
 
