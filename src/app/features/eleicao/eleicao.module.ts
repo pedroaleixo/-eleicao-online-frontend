@@ -1,3 +1,4 @@
+import { ComissaoDialogComponent } from './components/comissao-dialog/comissao-dialog.component';
 import { CargoDialogComponent } from './components/cargo-dialog/cargo-dialog.component';
 import { NgModule } from '@angular/core';
 import { EleicaoListComponent } from './components/eleicao-list/eleicao-list.component';
@@ -10,7 +11,8 @@ import { SharedModule } from 'src/app/shared.module';
   declarations: [
     EleicaoListComponent,
     EleicaoFormComponent,
-    CargoDialogComponent
+    CargoDialogComponent,
+    ComissaoDialogComponent
   ],
   imports: [
     SharedModule

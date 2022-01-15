@@ -13,6 +13,8 @@ import { addTimeToDate } from 'src/app/core/util/date.util';
 import { MatDialog } from '@angular/material/dialog';
 import { CargoDialogComponent } from '../cargo-dialog/cargo-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { ComissaoDialogComponent } from '../comissao-dialog/comissao-dialog.component';
+import { Pessoa } from 'src/app/features/pessoa/interfaces/pessoa';
 
 @Component({
   selector: 'app-eleicao-form',
@@ -27,6 +29,8 @@ export class EleicaoFormComponent implements OnInit {
   logged: boolean = false;
   displayedColumnsCargo: string[] = ['nome','escolhas','acoes'];
   dataSourceCargo = new MatTableDataSource<Cargo>();
+  displayedColumnsComissao: string[] = ['nome','acoes'];
+  dataSourceComissao = new MatTableDataSource<Pessoa>();
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private eleicaoService: EleicaoService, private snackbarService: SnackbarService,
@@ -60,9 +64,9 @@ export class EleicaoFormComponent implements OnInit {
         this.eleicaoForm.get('horaInicio').setValue(dataHoraInicio.getHours()+":"+dataHoraInicio.getMinutes());
         this.eleicaoForm.get('horaFim').setValue(dataHoraFim.getHours()+":"+dataHoraFim.getMinutes());
         this.eleicaoForm.get('situacao').setValue(this.getSituacaoLabel(Number(e.situacao)));
-        this.eleicaoForm.get('comissaoEleitoral').setValue(e.comissaoEleitoral);
 
         this.dataSourceCargo.data = e.cargos;
+        this.dataSourceComissao.data = e.comissaoEleitoral.membros;
       });
     }
 
@@ -85,11 +89,13 @@ export class EleicaoFormComponent implements OnInit {
       dataHoraInicio: addTimeToDate(this.eleicaoForm.get('dataInicio').value, this.eleicaoForm.get('horaInicio').value),
       dataHoraFim: addTimeToDate(this.eleicaoForm.get('dataFim').value, this.eleicaoForm.get('horaFim').value),
       cargos: this.dataSourceCargo.data,
-      comissaoEleitoral: this.comissaoEleitoral};
+      comissaoEleitoral: {membros: this.dataSourceComissao.data}
+    };
 
     if(this.eleicao){
       eleicaoDTO.id = this.eleicao.id;
       eleicaoDTO.situacao = getValorSituacaoEleicao(this.eleicaoForm.get('situacao').value);
+      eleicaoDTO.comissaoEleitoral.id = this.eleicao.comissaoEleitoral?.id;
       this.eleicaoService.atualizar(eleicaoDTO).subscribe(resp =>{
         this.router.navigate(['/eleicao']);
         this.snackbarService.success('Eleicao atualizada com sucesso');
@@ -136,8 +142,38 @@ export class EleicaoFormComponent implements OnInit {
     this.dataSourceCargo.data = this.dataSourceCargo.data.filter(c => c.nome != nomeCargo);
   }
 
-  abrirModalComissao(event){
+  abrirModalMembro(event){
     event.preventDefault();
+
+    const dialogRef = this.dialog.open(ComissaoDialogComponent, {
+      data: {membros: this.dataSourceComissao.data}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.dataSourceComissao.data = result.data;
+      }
+    });
+  }
+
+  redirecionarParaEdicaoMembro(event, cpf:number){
+    event.preventDefault();
+    const dialogRef = this.dialog.open(ComissaoDialogComponent, {
+      data: {
+        membros: this.dataSourceComissao.data,
+        membroEditado: this.dataSourceComissao.data.find(c => c.cpf === cpf) }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.dataSourceComissao.data = result.data;
+      }
+    });
+  }
+
+  removerMembro(event, cpf:number){
+    event.preventDefault();
+    this.dataSourceComissao.data = this.dataSourceComissao.data.filter(c => c.cpf != cpf);
   }
 
   getSituacaoLabel(value:number){
