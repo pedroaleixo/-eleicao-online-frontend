@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { EleicaoListComponent } from './components/eleicao-list/eleicao-list.component';
 import { EleicaoFormComponent } from './components/eleicao-form/eleicao-form.component';
 import { SharedModule } from 'src/app/shared.module';
+import { EleicaoConfiguracaoComponent } from './components/eleicao-configuracao/eleicao-configuracao.component';
 
 
 
@@ -12,7 +13,8 @@ import { SharedModule } from 'src/app/shared.module';
     EleicaoListComponent,
     EleicaoFormComponent,
     CargoDialogComponent,
-    ComissaoDialogComponent
+    ComissaoDialogComponent,
+    EleicaoConfiguracaoComponent
   ],
   imports: [
     SharedModule

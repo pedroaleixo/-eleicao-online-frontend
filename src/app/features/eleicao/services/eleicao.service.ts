@@ -16,6 +16,7 @@ const API_URL = environment.apiUrl+'/api';
 })
 export class EleicaoService {
 
+
   constructor(private http: HttpClient) { }
 
   public listarEleicoes(): Observable<Eleicao[]>{
@@ -54,6 +55,10 @@ export class EleicaoService {
 
   public buscarEleicaoPorId(idEleicao: number) : Observable<Eleicao>{
     return this.http.get<Eleicao>(`${API_URL}/eleicao/${idEleicao}`);
+  }
+
+  buscarConfiguracaoEleicao(idEleicao: number) : Observable<Configuracao> {
+    return this.http.get<Configuracao>(`${API_URL}/eleicao/configuracao/${idEleicao}`);
   }
 
   public buscarEstatisticaEleicao(idEleicao: number, tipoEstatistica: number) : Observable<Eleicao>{

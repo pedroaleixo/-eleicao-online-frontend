@@ -1,0 +1,32 @@
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title>Configuração de Eleição</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ul>
+        <li>
+          <mat-checkbox  [checked]="exibirNumerosCandidatos" (change)="valueChange('exibirNumerosCandidatos', $event.checked)">Exibir números de candidatos</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox [checked]="ordenarPorNumeros" (change)="valueChange('ordenarPorNumeros', $event.checked)">Ordenar por números</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox [checked]="exibirConsultaEleitoresVotantes" (change)="valueChange('exibirConsultaEleitoresVotantes', $event.checked)">Exibir consulta de eleitores votantes</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox [checked]="existiraTempoSessao" (change)="valueChange('existiraTempoSessao', $event.checked)">Habilitar tempo de sessão para votar</mat-checkbox>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+
+  <section class="buttons-section" layout="row" layout-align="end center">
+    <button mat-raised-button (click)="voltar()">Voltar</button>
+    <button mat-raised-button (click)="salvar()" color="primary">Salvar</button>
+  </section>
+
+
+
+
+

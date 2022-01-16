@@ -107,7 +107,7 @@ export class EleicaoListComponent implements OnInit {
   }
 
   redirecionarParaCofiguracao(id:number){
-    this.router.navigate(['/eleicao/form']);
+    this.router.navigate([`/eleicao/configuracao/${id}`]);
   }
 
   confirmarRemocao(id:number){

@@ -1,3 +1,4 @@
+import { EleicaoConfiguracaoComponent } from './features/eleicao/components/eleicao-configuracao/eleicao-configuracao.component';
 import { EleicaoAtivaGuard } from './core/guards/eleicao-ativa.guard';
 import { VotacaoListComponent } from './features/votacao/components/votacao-list/votacao-list.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
@@ -87,6 +88,11 @@ const routes: Routes = [
   {
     path: 'eleicao/form/:id',
     component: EleicaoFormComponent,
+    canActivate: [AuthAdminGuard]
+  },
+  {
+    path: 'eleicao/configuracao/:id',
+    component: EleicaoConfiguracaoComponent,
     canActivate: [AuthAdminGuard]
   },
   {

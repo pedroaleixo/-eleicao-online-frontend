@@ -94,13 +94,13 @@
         <ng-container matColumnDef="acoes">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let eleicao">
-              <button mat-button (click)="redirecionarParaEdicao(eleicao.id)">
+              <button mat-button matTooltip="Editar" (click)="redirecionarParaEdicao(eleicao.id)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-button (click)="confirmarRemocao(eleicao.id)">
+              <button mat-button matTooltip="Remover" (click)="confirmarRemocao(eleicao.id)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-button (click)="redirecionarParaCofiguracao(eleicao.id)">
+              <button mat-button matTooltip="Configurar" (click)="redirecionarParaCofiguracao(eleicao.id)">
                 <mat-icon>construction</mat-icon>
               </button>
           </td>

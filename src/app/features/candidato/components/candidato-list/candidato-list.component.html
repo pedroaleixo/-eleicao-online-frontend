@@ -53,10 +53,10 @@
         <ng-container matColumnDef="acoes">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let candidato">
-              <button mat-button (click)="redirecionarParaEdicao(candidato.id)">
+              <button mat-button matTooltip="Editar" (click)="redirecionarParaEdicao(candidato.id)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-button (click)="confirmarRemocao(candidato.id)">
+              <button mat-button matTooltip="Remover" (click)="confirmarRemocao(candidato.id)">
                 <mat-icon>delete</mat-icon>
               </button>
           </td>
