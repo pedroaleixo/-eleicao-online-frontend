@@ -27,19 +27,18 @@ export class EleicaoConfiguracaoComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
     if(id){
-      this.eleicaoService.buscarConfiguracaoEleicao(id).subscribe(c => {
-        if(c){
-          this.configuracao = c;
-          this.exibirNumerosCandidatos = c.exibirNumerosCandidatos;
-          this.exibirConsultaEleitoresVotantes = c.exibirConsultaEleitoresVotantes;
-          this.ordenarPorNumeros = c.ordenarPorNumeros;
-          this.existiraTempoSessao = c.existiraTempoSessao;
-        } else {
-          this.eleicaoService.buscarEleicaoPorId(id).subscribe(e => {
-            this.eleicao = e;
-          });
-        }
+      this.eleicaoService.buscarEleicaoPorId(id).subscribe(e => {
+        this.eleicao = e;
 
+        this.eleicaoService.buscarConfiguracaoEleicao(id).subscribe(c => {
+          if(c){
+            this.configuracao = c;
+            this.exibirNumerosCandidatos = c.exibirNumerosCandidatos;
+            this.exibirConsultaEleitoresVotantes = c.exibirConsultaEleitoresVotantes;
+            this.ordenarPorNumeros = c.ordenarPorNumeros;
+            this.existiraTempoSessao = c.existiraTempoSessao;
+          }
+        });
       });
     }
   }
