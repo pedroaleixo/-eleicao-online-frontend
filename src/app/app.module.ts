@@ -1,3 +1,4 @@
+import { ConsultaEleitoresVotantesModule } from './features/consulta-eleitores-votantes/consulta-eleitores-votantes.module';
 import { LoadingModule } from './shared/loading/loading.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -39,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PessoaModule,
     CandidatoModule,
     EleitorModule,
+    ConsultaEleitoresVotantesModule,
     ResultadoModule,
     VotacaoModule,
     BrowserAnimationsModule,

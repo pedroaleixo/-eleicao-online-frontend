@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsultaEleitoresVotantesComponent } from './components/consulta-eleitores-votantes/consulta-eleitores-votantes.component';
@@ -9,7 +10,8 @@ import { ConsultaEleitoresVotantesComponent } from './components/consulta-eleito
     ConsultaEleitoresVotantesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class ConsultaEleitoresVotantesModule { }

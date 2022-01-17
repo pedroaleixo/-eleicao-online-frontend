@@ -21,6 +21,7 @@ import { AdministradorFormComponent } from './features/administrador/components/
 import { EleitorFormComponent } from './features/eleitor/components/eleitor-form/eleitor-form.component';
 import { CandidatoFormComponent } from './features/candidato/components/candidato-form/candidato-form.component';
 import { EleicaoFormComponent } from './features/eleicao/components/eleicao-form/eleicao-form.component';
+import { ConsultaEleitoresVotantesComponent } from './features/consulta-eleitores-votantes/components/consulta-eleitores-votantes/consulta-eleitores-votantes.component';
 
 const routes: Routes = [
   {
@@ -123,6 +124,11 @@ const routes: Routes = [
   {
     path: 'eleitor/form/:id',
     component: EleitorFormComponent,
+    canActivate: [AuthAdminGuard, EleicaoAtivaGuard]
+  },
+  {
+    path: 'consulta-eleitores-votantes',
+    component: ConsultaEleitoresVotantesComponent,
     canActivate: [AuthAdminGuard, EleicaoAtivaGuard]
   },
   {
