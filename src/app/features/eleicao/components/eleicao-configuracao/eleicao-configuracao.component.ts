@@ -18,6 +18,7 @@ export class EleicaoConfiguracaoComponent implements OnInit {
   exibirConsultaEleitoresVotantes:boolean = false;
   existiraTempoSessao:boolean = false;
   configuracao:Configuracao;
+  eleicao:Eleicao;
 
   constructor(private eleicaoService: EleicaoService,
     private snackbarService: SnackbarService,
@@ -33,6 +34,10 @@ export class EleicaoConfiguracaoComponent implements OnInit {
           this.exibirConsultaEleitoresVotantes = c.exibirConsultaEleitoresVotantes;
           this.ordenarPorNumeros = c.ordenarPorNumeros;
           this.existiraTempoSessao = c.existiraTempoSessao;
+        } else {
+          this.eleicaoService.buscarEleicaoPorId(id).subscribe(e => {
+            this.eleicao = e;
+          });
         }
 
       });
@@ -46,7 +51,7 @@ export class EleicaoConfiguracaoComponent implements OnInit {
 	    exibirConsultaEleitoresVotantes: this.exibirConsultaEleitoresVotantes,
 	    ordenarPorNumeros: this.ordenarPorNumeros,
 	    existiraTempoSessao: this.existiraTempoSessao,
-      eleicao:this.configuracao.eleicao
+      eleicao:this.configuracao ? this.configuracao.eleicao : this.eleicao
     }
     this.eleicaoService.atualizarConfiguracao(dto).subscribe(resp => {
       this.router.navigate(['/eleicao']);
