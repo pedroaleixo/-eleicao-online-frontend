@@ -50,7 +50,7 @@ export class EleicaoConfiguracaoComponent implements OnInit {
 	    exibirConsultaEleitoresVotantes: this.exibirConsultaEleitoresVotantes,
 	    ordenarPorNumeros: this.ordenarPorNumeros,
 	    existiraTempoSessao: this.existiraTempoSessao,
-      eleicao:this.configuracao ? this.configuracao.eleicao : this.eleicao
+      eleicao:this.eleicao
     }
     this.eleicaoService.atualizarConfiguracao(dto).subscribe(resp => {
       this.router.navigate(['/eleicao']);
