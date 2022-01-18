@@ -1,1 +1,108 @@
-<p>resultado-list works!</p>
+<h3>Divulgação de resultados</h3>
+<br/>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Pesquisa</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="row">
+    <form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+      <div class="row">
+        <mat-form-field class="col-sm-6" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput id="nome" formControlName="nome" [required]="false">
+        </mat-form-field>
+        <mat-form-field class="col-sm-6" appearance="outline">
+          <mat-label>Instituição</mat-label>
+          <input matInput id="instituicao" formControlName="instituicao" [required]="false">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-sm-3" appearance="outline">
+          <mat-label>Início</mat-label>
+          <input matInput readonly id="dataInicio" formControlName="dataInicio" [matDatepicker]="pickerInicio" [required]="false">
+          <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-1" appearance="outline">
+          <input matInput readonly id="horaInicio" formControlName="horaInicio" [ngxTimepicker]="horaInicio" [format]="24" [required]="false" />
+          <ngx-material-timepicker #horaInicio ></ngx-material-timepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3" appearance="outline">
+          <mat-label>Fim</mat-label>
+          <input matInput readonly id="dataFim" formControlName="dataFim" [matDatepicker]="pickerFim" [required]="false">
+          <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFim></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-sm-1" appearance="outline">
+          <input matInput readonly id="horaFim" formControlName="horaFim" [ngxTimepicker]="horaFim" [format]="24" [required]="false" />
+          <ngx-material-timepicker #horaFim ></ngx-material-timepicker>
+        </mat-form-field>
+      </div>
+      <section class="buttons-section" layout="row" layout-align="end center">
+        <button mat-raised-button (click)="limpar()">Limpar</button>
+        <button type="submit" mat-raised-button color="primary">Pesquisar</button>
+      </section>
+    </form>
+  </mat-card-content>
+</mat-card>
+<br/>
+<mat-card>
+  <mat-card-header class="card-header-custom">
+      <mat-card-title>Eleições</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="instituicao">
+          <th mat-header-cell *matHeaderCellDef> Instituição </th>
+          <td mat-cell *matCellDef="let element"> {{element.instituicao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHoraInicio">
+          <th mat-header-cell *matHeaderCellDef> Início </th>
+          <td mat-cell *matCellDef="let element"> {{element.dataHoraInicio | date: 'dd/MM/yyyy HH:mm:SS'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHoraFim">
+          <th mat-header-cell *matHeaderCellDef> Fim </th>
+          <td mat-cell *matCellDef="let element"> {{element.dataHoraFim | date: 'dd/MM/yyyy HH:mm:SS'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let eleicao">
+              <button mat-button matTooltip="VIsualizar" (click)="redirecionarParaDetalhe(eleicao.id)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="9999">
+            Não há eleições disponíveis
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Selecione página de elementos"
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     (page)="pageEvent = buscarEleicoes($event)">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+

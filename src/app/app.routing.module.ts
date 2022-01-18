@@ -1,3 +1,5 @@
+import { ResultadoDetailComponent } from './features/resultado/components/resultado-detail/resultado-detail.component';
+import { ResultadoListComponent } from './features/resultado/components/resultado-list/resultado-list.component';
 import { EleicaoConfiguracaoComponent } from './features/eleicao/components/eleicao-configuracao/eleicao-configuracao.component';
 import { EleicaoAtivaGuard } from './core/guards/eleicao-ativa.guard';
 import { VotacaoListComponent } from './features/votacao/components/votacao-list/votacao-list.component';
@@ -144,6 +146,14 @@ const routes: Routes = [
     path: 'votacao/list/:eleicao',
     component: VotacaoListComponent,
     canActivate: [AuthVotacaoGuard],
+  },
+  {
+    path: 'resultado',
+    component: ResultadoListComponent
+  },
+  {
+    path: 'resultado/detail/:id',
+    component: ResultadoDetailComponent
   },
   {
     path: 'error/:ticket',
