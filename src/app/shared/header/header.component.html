@@ -27,13 +27,13 @@
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav">
-    <a mat-button routerLink="/administrador">Manter Administrador</a>
-    <a mat-button routerLink="/pessoa">Manter Pessoa</a>
-    <a mat-button routerLink="/eleicao">Manter Eleição</a>
-    <a mat-button routerLink="/candidato">Manter Candidato</a>
-    <a mat-button routerLink="/eleitor">Manter Eleitor</a>
-    <a mat-button routerLink="/consultar-estatisticas">Consultar Estatísticas</a>
-    <a mat-button routerLink="/consultar-eleitores-votantes">Consultar Eleitores Votantes</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/administrador">Manter Administrador</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/pessoa">Manter Pessoa</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/eleicao">Manter Eleição</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/candidato">Manter Candidato</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/eleitor">Manter Eleitor</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/consulta-estatisticas">Consultar Estatísticas</a>
+    <a mat-button (click)="toogleMenu()" routerLink="/consulta-eleitores-votantes">Consultar Eleitores Votantes</a>
   </mat-sidenav>
   <mat-sidenav-content>
     <main>
