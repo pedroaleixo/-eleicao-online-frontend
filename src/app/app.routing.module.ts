@@ -24,6 +24,7 @@ import { EleitorFormComponent } from './features/eleitor/components/eleitor-form
 import { CandidatoFormComponent } from './features/candidato/components/candidato-form/candidato-form.component';
 import { EleicaoFormComponent } from './features/eleicao/components/eleicao-form/eleicao-form.component';
 import { ConsultaEleitoresVotantesComponent } from './features/consulta-eleitores-votantes/components/consulta-eleitores-votantes/consulta-eleitores-votantes.component';
+import { ConsultarEstatisticasComponent } from './features/consultar-estatisticas/components/consultar-estatisticas/consultar-estatisticas.component';
 
 const routes: Routes = [
   {
@@ -131,6 +132,11 @@ const routes: Routes = [
   {
     path: 'consulta-eleitores-votantes',
     component: ConsultaEleitoresVotantesComponent,
+    canActivate: [AuthAdminGuard, EleicaoAtivaGuard]
+  },
+  {
+    path: 'consulta-estatisticas',
+    component: ConsultarEstatisticasComponent,
     canActivate: [AuthAdminGuard, EleicaoAtivaGuard]
   },
   {

@@ -32,7 +32,7 @@
       </button>
   </mat-card-header>
   <mat-card-content>
-    <div class="table-responsive">
+    <div id="table" class="table-responsive">
       <table mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="nome">
@@ -86,4 +86,5 @@
 </mat-card>
 <section class="buttons-section" layout="row" layout-align="end center">
   <button mat-raised-button (click)="voltar()">Voltar</button>
+  <button color="primary" mat-raised-button (click)="exportar()">Exportar</button>
 </section>

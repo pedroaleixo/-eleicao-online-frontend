@@ -7,6 +7,7 @@ import { Eleicao } from 'src/app/features/eleicao/interfaces/eleicao';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EleicaoService } from 'src/app/features/eleicao/services/eleicao.service';
 import { Cargo } from 'src/app/features/eleicao/interfaces/cargo';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 
 @Component({
   selector: 'app-resultado-detail',
@@ -51,6 +52,10 @@ export class ResultadoDetailComponent implements OnInit {
    });
 
    return blocos.entries();
+  }
+
+  exportar() {
+    exportarElementoParaPDF('resultado','resultado-eleicao-'+this.eleicao.nome);
   }
 
   voltar(){

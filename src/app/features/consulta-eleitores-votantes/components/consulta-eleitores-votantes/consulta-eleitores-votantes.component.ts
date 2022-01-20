@@ -7,6 +7,7 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { ELEICAO_ATIVA } from 'src/app/core/util/constants';
 import { addTimeToDate } from 'src/app/core/util/date.util';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 import { Eleitor } from 'src/app/features/eleitor/interfaces/eleitor';
 import { EleitorService } from 'src/app/features/eleitor/services/eleitor.service';
 import { FiltroVotantes } from '../../interfaces/filtro-votantes';
@@ -82,6 +83,10 @@ export class ConsultaEleitoresVotantesComponent implements OnInit {
     this.filtroForm.reset();
     this.pageIndex = 0;
     this.filtrar();
+  }
+
+  exportar() {
+    exportarElementoParaPDF('table','eleitores-votantes');
   }
 
   voltar(){

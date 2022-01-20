@@ -1,3 +1,4 @@
+import { Estatistica } from './../interfaces/estatistica';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -57,12 +58,12 @@ export class EleicaoService {
     return this.http.get<Eleicao>(`${API_URL}/eleicao/${idEleicao}`);
   }
 
-  buscarConfiguracaoEleicao(idEleicao: number) : Observable<Configuracao> {
+  public buscarConfiguracaoEleicao(idEleicao: number) : Observable<Configuracao> {
     return this.http.get<Configuracao>(`${API_URL}/eleicao/configuracao/${idEleicao}`);
   }
 
-  public buscarEstatisticaEleicao(idEleicao: number, tipoEstatistica: number) : Observable<Eleicao>{
-    return this.http.get<Eleicao>(`${API_URL}/eleicao/estatistica/${idEleicao}/${tipoEstatistica}`);
+  public buscarEstatisticaEleicao(idEleicao: number, tipoEstatistica: number) : Observable<Estatistica>{
+    return this.http.get<Estatistica>(`${API_URL}/eleicao/estatistica/${idEleicao}/${tipoEstatistica}`);
   }
 
   public cadastrar(eleicao: Eleicao): Observable<Eleicao> {

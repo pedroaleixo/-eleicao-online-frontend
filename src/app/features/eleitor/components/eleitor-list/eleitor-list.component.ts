@@ -14,6 +14,7 @@ import { Eleitor } from '../../interfaces/eleitor';
 import { EleitorService } from '../../services/eleitor.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { ELEICAO_ATIVA } from 'src/app/core/util/constants';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 
 @Component({
   selector: 'app-eleitor-list',
@@ -115,6 +116,10 @@ export class EleitorListComponent implements OnInit {
         });
       }
     });
+  }
+
+  exportar() {
+    exportarElementoParaPDF('table','lista-eleitores');
   }
 
   voltar(){

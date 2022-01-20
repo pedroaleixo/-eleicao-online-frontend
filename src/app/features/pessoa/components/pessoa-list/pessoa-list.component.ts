@@ -12,6 +12,7 @@ import { somenteNumeros } from 'src/app/core/util/string.util';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 
 @Component({
   selector: 'app-pessoa-list',
@@ -109,6 +110,10 @@ export class PessoaListComponent implements OnInit {
         });
       }
     });
+  }
+
+  exportar() {
+    exportarElementoParaPDF('table','lista-pessoas');
   }
 
   voltar(){

@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import {ChartModule} from 'primeng/chart';
 import { CpfPipe } from './core/pipes/cpf.pipe';
 import { MaterialModule } from './material.module';
 import { DeleteDialogModule } from './shared/delete-dialog/delete-dialog.module';
@@ -13,6 +14,7 @@ import { DeleteDialogModule } from './shared/delete-dialog/delete-dialog.module'
  exports:      [
    CommonModule,
   MaterialModule,
+  ChartModule,
   DeleteDialogModule,
   ReactiveFormsModule,
   TextMaskModule,

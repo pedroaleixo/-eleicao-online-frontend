@@ -1,3 +1,4 @@
+import { TipoEstatistica } from './../../features/consultar-estatisticas/enums/tipo-estatistica';
 import { SituacaoEleicao } from 'src/app/features/eleicao/enums/situacao-eleicao';
 
 export function getValoresSituacaoEleicao(): any[] {
@@ -14,4 +15,15 @@ export function getValoresSituacaoEleicao(): any[] {
 
 export function getValorSituacaoEleicao(label:string): any[] {
   return getValoresSituacaoEleicao().find(situacao => situacao.label === label).value;
+}
+
+
+export function getValoresTiposEstatisticas(): any[] {
+  return [
+    {value: TipoEstatistica.ELEITORADO_POR_SEXO.valueOf(), label: 'Eleitorado por sexo'},
+    {value: TipoEstatistica.ELEITORADO_POR_FAIXA_ETARIA.valueOf(), label: 'Eleitorado por faixa etária'},
+    {value: TipoEstatistica.CANDIDATO_POR_SEXO.valueOf(), label: 'Candidato por sexo'},
+    {value: TipoEstatistica.CANDIDATO_POR_FAIXA_ETARIA.valueOf(), label: 'Candidato por faixa etária'},
+    {value: TipoEstatistica.DISTRIBUICAO_VOTANTES_DIA.valueOf(), label: 'Distribuição de votantes por dia'}
+  ]
 }

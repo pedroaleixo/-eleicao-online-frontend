@@ -12,6 +12,7 @@ import { EleicaoService } from '../../services/eleicao.service';
 import { FiltroEleicao } from 'src/app/features/pessoa/interfaces/filtro-eleicao';
 import { getValoresSituacaoEleicao } from 'src/app/core/util/enum.util';
 import { addTimeToDate } from 'src/app/core/util/date.util';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 
 @Component({
   selector: 'app-eleicao-list',
@@ -124,6 +125,9 @@ export class EleicaoListComponent implements OnInit {
     });
   }
 
+  exportar() {
+    exportarElementoParaPDF('table','lista-eleicoes');
+  }
 
   voltar(){
     this.router.navigate(['/admin']);

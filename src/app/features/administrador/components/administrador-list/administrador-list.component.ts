@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -12,98 +12,111 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { AdministradorService } from '../../services/administrador.service';
 import { Administrador } from '../../interfaces/administrador';
 import { FiltroPessoa } from 'src/app/features/pessoa/interfaces/filtro-pessoa';
+import jspdf, { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 
 @Component({
   selector: 'app-administrador-list',
   templateUrl: './administrador-list.component.html',
-  styleUrls: ['./administrador-list.component.scss']
+  styleUrls: ['./administrador-list.component.scss'],
 })
 export class AdministradorListComponent implements OnInit {
-
   cpfMask = CPF_MASK;
-  filtro:FiltroPessoa = {};
+  filtro: FiltroPessoa = {};
   displayedColumns: string[] = ['nome', 'cpf', 'acoes'];
   dataSource = new MatTableDataSource<Administrador>();
   filtroForm!: FormGroup;
   pageEvent!: PageEvent;
   pageIndex: number = 0;
-  pageSize:number = 5;
-  length!:number;
+  pageSize: number = 5;
+  length!: number;
 
-  @ViewChild(MatPaginator)paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private administradorService: AdministradorService,
     private snackbarService: SnackbarService,
     public dialog: MatDialog,
-    private router: Router) { }
-
-
+    private router: Router
+  ) {}
 
   ngOnInit() {
-
     this.filtroForm = this.formBuilder.group({
       nome: [''],
-      cpf: ['']
+      cpf: [''],
     });
 
     this.filtrar();
   }
 
-  filtrar(){
-    const cpf = this.filtroForm.get('cpf').value ? somenteNumeros(this.filtroForm.get('cpf').value) : null;
-    const nome = this.filtroForm.get('nome').value ? this.filtroForm.get('nome').value : null;
-    this.filtro = {cpf, nome};
+  filtrar() {
+    const cpf = this.filtroForm.get('cpf').value
+      ? somenteNumeros(this.filtroForm.get('cpf').value)
+      : null;
+    const nome = this.filtroForm.get('nome').value
+      ? this.filtroForm.get('nome').value
+      : null;
+    this.filtro = { cpf, nome };
 
-    this.administradorService.listarAdministradoresPorFiltro(this.filtro, this.pageIndex, this.pageSize)
-    .subscribe(page => {
-      this.dataSource.data = page.content;
-      this.pageIndex = (page.pageable ? page.pageable.pageNumber : 0);
-      this.pageSize = (page.pageable ? page.pageable.pageSize : 5);
-      this.length = page.totalElements;
-    });
+    this.administradorService
+      .listarAdministradoresPorFiltro(
+        this.filtro,
+        this.pageIndex,
+        this.pageSize
+      )
+      .subscribe((page) => {
+        this.dataSource.data = page.content;
+        this.pageIndex = page.pageable ? page.pageable.pageNumber : 0;
+        this.pageSize = page.pageable ? page.pageable.pageSize : 5;
+        this.length = page.totalElements;
+      });
   }
 
-  limpar(){
+  limpar() {
     this.filtroForm.reset();
     this.pageIndex = 0;
     this.filtrar();
   }
 
-  buscarAdministradores(event:PageEvent){
-    this.userService.getUser().subscribe(user => {
-      if(user?.pessoa) {
-        this.administradorService.listarAdministradoresPorFiltro(this.filtro, event.pageIndex,
-          event.pageSize)
-        .subscribe(page => {
-          this.dataSource.data = page.content;
-          this.pageIndex = event.pageIndex;
-          this.pageSize = event.pageSize;
-          this.length = page.totalElements;
-        });
+  buscarAdministradores(event: PageEvent) {
+    this.userService.getUser().subscribe((user) => {
+      if (user?.pessoa) {
+        this.administradorService
+          .listarAdministradoresPorFiltro(
+            this.filtro,
+            event.pageIndex,
+            event.pageSize
+          )
+          .subscribe((page) => {
+            this.dataSource.data = page.content;
+            this.pageIndex = event.pageIndex;
+            this.pageSize = event.pageSize;
+            this.length = page.totalElements;
+          });
       }
     });
 
     return event;
   }
 
-
-  redirecionarParaCadastro(){
+  redirecionarParaCadastro() {
     this.router.navigate(['/administrador/form']);
   }
 
-  redirecionarParaEdicao(id:number){
+  redirecionarParaEdicao(id: number) {
     this.router.navigate([`/administrador/form/${id}`]);
   }
 
-  confirmarRemocao(id:number){
+  confirmarRemocao(id: number) {
     const dialogRef = this.dialog.open(DeleteDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.administradorService.remover(id).subscribe(resp => {
-          window.scroll(0,0);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.administradorService.remover(id).subscribe((resp) => {
+          window.scroll(0, 0);
           this.snackbarService.success('Administrador removido com sucesso');
           this.limpar();
         });
@@ -111,9 +124,11 @@ export class AdministradorListComponent implements OnInit {
     });
   }
 
-  voltar(){
+  voltar() {
     this.router.navigate(['/admin']);
   }
 
-
+  exportar() {
+    exportarElementoParaPDF('table','lista-administradores');
+  }
 }

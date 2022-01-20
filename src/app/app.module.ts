@@ -23,6 +23,7 @@ import { ErrorInterceptor } from './core/interceptors/error-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './core/interceptors/request.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConsultarEstatisticasModule } from './features/consultar-estatisticas/consultar-estatisticas.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CandidatoModule,
     EleitorModule,
     ConsultaEleitoresVotantesModule,
+    ConsultarEstatisticasModule,
     ResultadoModule,
     VotacaoModule,
     BrowserAnimationsModule,

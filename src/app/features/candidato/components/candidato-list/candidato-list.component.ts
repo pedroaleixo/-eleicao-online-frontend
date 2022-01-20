@@ -14,6 +14,7 @@ import { StorageService } from 'src/app/core/services/storage.service';
 import { ELEICAO_ATIVA } from 'src/app/core/util/constants';
 import { Candidato } from '../../interfaces/candidato';
 import { CandidatoService } from '../../services/candidato.service';
+import { exportarElementoParaPDF } from 'src/app/core/util/pdf.util';
 
 @Component({
   selector: 'app-candidato-list',
@@ -115,6 +116,10 @@ export class CandidatoListComponent implements OnInit {
         });
       }
     });
+  }
+
+  exportar() {
+    exportarElementoParaPDF('table','lista-candidatos');
   }
 
   voltar(){
