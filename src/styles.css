@@ -97,6 +97,9 @@ mat-card-content {
   .table-responsive button {
     width: 1rem!important;
  }
+ .mat-paginator-range-label {
+   display: contents;
+ }
 }
 
 @media all and (max-width: 768px) {
