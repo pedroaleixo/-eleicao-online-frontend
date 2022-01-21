@@ -13,7 +13,7 @@
       <mat-label>Eleição ativa</mat-label>
       <mat-select panelClass="select" disableOptionCentering (selectionChange)="selecionarEleicao($event)" placeholder="Selecione" >
         <mat-option value=""></mat-option>
-        <mat-option *ngFor="let eleicao of eleicoes" [value]="eleicao.id">
+        <mat-option *ngFor="let eleicao of (eleicoes$ | async)" [value]="eleicao.id">
           {{eleicao.nome}}
         </mat-option>
       </mat-select>

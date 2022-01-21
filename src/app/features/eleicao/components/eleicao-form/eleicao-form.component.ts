@@ -97,11 +97,13 @@ export class EleicaoFormComponent implements OnInit {
       eleicaoDTO.situacao = getValorSituacaoEleicao(this.eleicaoForm.get('situacao').value);
       eleicaoDTO.comissaoEleitoral.id = this.eleicao.comissaoEleitoral?.id;
       this.eleicaoService.atualizar(eleicaoDTO).subscribe(resp =>{
+        this.eleicaoService.atualizarEleicoesHeader();
         this.router.navigate(['/eleicao']);
         this.snackbarService.success('Eleicao atualizada com sucesso');
       });
     } else {
       this.eleicaoService.cadastrar(eleicaoDTO).subscribe(resp =>{
+        this.eleicaoService.atualizarEleicoesHeader();
         this.router.navigate(['/eleicao']);
         this.snackbarService.success('Eleicao cadastrada com sucesso');
       });

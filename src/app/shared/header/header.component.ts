@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { TokenService } from 'src/app/core/services/token.service';
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   showLogout: boolean = false;
   showMenu: boolean = false;
   isMenuOpen: boolean = false;
-  eleicoes:Eleicao[] = [];
+  eleicoes$: Subject<Eleicao[]>;
 
   constructor(
     private storageService: StorageService,
@@ -29,6 +30,8 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.eleicoes$ = this.eleicaoService.getEleicoesHeader();
+
     this.userService.getUser().subscribe((r) => {
       if (r && r.perfis && r.perfis.length > 0) {
         if (!this.tokenService.isExpired()) {
@@ -36,12 +39,14 @@ export class HeaderComponent implements OnInit {
           const ambiente = this.storageService.getItem('ambiente');
           if (this.userService.isAdmin() && ambiente === 'admin') {
             this.showMenu = true;
-            this.eleicaoService.listarEleicoes().pipe(take(1))
-              .subscribe(eles => this.eleicoes = eles);
+            this.eleicaoService.listarEleicoes().subscribe(eles => {
+              this.eleicoes$.next(eles);
+            });
           } else if (this.userService.isComissao() && ambiente === 'admin'){
             this.showMenu = true;
-            this.eleicaoService.listarEleicoesPorPessoaMembroComissao(r.pessoa).pipe(take(1))
-              .subscribe(eles => this.eleicoes = eles);
+             this.eleicaoService.listarEleicoesPorPessoaMembroComissao(r.pessoa).subscribe(eles => {
+              this.eleicoes$.next(eles);
+             });
           } else {
             this.showMenu = false;
           }

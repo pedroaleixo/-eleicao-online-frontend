@@ -118,6 +118,7 @@ export class EleicaoListComponent implements OnInit {
       if(result){
         this.eleicaoService.remover(id).subscribe(resp => {
           window.scroll(0,0);
+          this.eleicaoService.atualizarEleicoesHeader();
           this.snackbarService.success('Eleição removida com sucesso');
           this.limpar();
         });

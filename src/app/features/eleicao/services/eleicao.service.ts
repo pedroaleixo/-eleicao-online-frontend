@@ -1,7 +1,8 @@
+import { UserService } from './../../../core/services/user.service';
 import { Estatistica } from './../interfaces/estatistica';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
 import { Candidato } from '../../candidato/interfaces/candidato';
 import { Eleitor } from '../../eleitor/interfaces/eleitor';
@@ -17,8 +18,9 @@ const API_URL = environment.apiUrl+'/api';
 })
 export class EleicaoService {
 
+  eleicoes$: Subject<Eleicao[]> = new Subject<Eleicao[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService:UserService) { }
 
   public listarEleicoes(): Observable<Eleicao[]>{
     return this.http.get<Eleicao[]>(`${API_URL}/eleicao`);
@@ -80,6 +82,24 @@ export class EleicaoService {
 
   public atualizarConfiguracao(configuracao: Configuracao): Observable<Configuracao> {
     return this.http.post<Configuracao>(`${API_URL}/eleicao/configuracao`, configuracao, {responseType : 'text' as 'json'});
+  }
+
+  public getEleicoesHeader(): Subject<Eleicao[]>{
+    return this.eleicoes$;
+  }
+
+  public atualizarEleicoesHeader(){
+    this.userService.getUser().subscribe((r) => {
+      if(this.userService.isAdmin()){
+        this.listarEleicoes().subscribe(eles => {
+          this.eleicoes$.next(eles);
+        });
+      } else if (this.userService.isComissao()){
+        this.listarEleicoesPorPessoaMembroComissao(r.pessoa).subscribe(eles => {
+          this.eleicoes$.next(eles);
+         });
+      }
+    });
   }
 }
 
