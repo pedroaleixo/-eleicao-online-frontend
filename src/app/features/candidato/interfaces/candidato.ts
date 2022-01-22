@@ -10,5 +10,6 @@ export interface Candidato {
   pessoa:Pessoa | null;
   eleicao:Eleicao;
   cargo?:Cargo;
+  branco?:boolean;
   acoes?:any;
 }

@@ -43,6 +43,8 @@ export class ResultadoDetailComponent implements OnInit {
   getBlocos(){
     const blocos = new Map<String, Candidato[]>();
 
+    this.candidatos = this.candidatos.filter(c => !c.branco).concat(this.candidatos.filter(c => c.branco))
+
     this.candidatos?.forEach(c => {
       if(blocos.has(c.cargo.nome)){
         blocos.get(c.cargo.nome).push(c);

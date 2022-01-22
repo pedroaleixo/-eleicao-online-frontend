@@ -93,7 +93,8 @@ export class VotacaoListComponent implements OnInit {
     this.eleicaoService
       .listarCandidatosEleicao(this.eleicao.id)
       .subscribe((candidatos) => {
-        candidatos.forEach((candidato) => {
+        candidatos.filter(c => !c.branco)
+          .forEach((candidato) => {
           const key = candidato.cargo.id;
           if (!this.map.has(key)) {
             this.map.set(key, {
@@ -125,16 +126,10 @@ export class VotacaoListComponent implements OnInit {
       cargoCandidato = {cargo: this.cargo, candidatos: []}
       this.escolhas.push(cargoCandidato);
     }
-    cargoCandidato.candidatos.push({
-      id: 0,
-      numero: 0,
-      votos: 0,
-      pessoa: null,
-      eleicao: this.eleicao,
-      cargo: this.cargo,
-      acoes: null,
-    });
 
+    this.idsCargos = Array.from(this.map.keys());
+    const objAtual = this.map.get(this.idsCargos[this.indiceCargo]);
+    cargoCandidato.candidatos.push(objAtual.candidatos.find(c => c.branco));
 
     this.ajustarNavegacao();
   }
