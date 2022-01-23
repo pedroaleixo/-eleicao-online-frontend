@@ -36,6 +36,7 @@ export class VotacaoListComponent implements OnInit {
   candidato!: Candidato | null;
   escolhas: CargoCandidato[] = [];
   mostrarSummary = false;
+  brancos: Candidato[] = [];
 
 
   constructor(
@@ -93,6 +94,7 @@ export class VotacaoListComponent implements OnInit {
     this.eleicaoService
       .listarCandidatosEleicao(this.eleicao.id)
       .subscribe((candidatos) => {
+        this.brancos = candidatos.filter(c => c.branco);
         candidatos.filter(c => !c.branco)
           .forEach((candidato) => {
           const key = candidato.cargo.id;
@@ -126,11 +128,8 @@ export class VotacaoListComponent implements OnInit {
       cargoCandidato = {cargo: this.cargo, candidatos: []}
       this.escolhas.push(cargoCandidato);
     }
-
-    this.idsCargos = Array.from(this.map.keys());
-    const objAtual = this.map.get(this.idsCargos[this.indiceCargo]);
-    cargoCandidato.candidatos.push(objAtual.candidatos.find(c => c.branco));
-
+    const branco = this.brancos.find(c => c.cargo.id === this.cargo.id);
+    cargoCandidato.candidatos.push({...branco});
     this.ajustarNavegacao();
   }
 
@@ -153,6 +152,7 @@ export class VotacaoListComponent implements OnInit {
   votar(){
     let idsCandidatos: number[] = [];
     this.escolhas.forEach(e => {
+      console.log(e.candidatos)
       idsCandidatos = idsCandidatos.concat(e.candidatos.map(c => c.id));
     });
 
