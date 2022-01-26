@@ -71,10 +71,12 @@ export class HeaderComponent implements OnInit {
   }
 
   selecionarEleicao(event:any){
+    console.log(event)
     if(event && event.value){
       this.storageService.setItem(ELEICAO_ATIVA, event.value);
     } else {
       this.storageService.removeItem(ELEICAO_ATIVA);
     }
+    this.router.navigate(['/admin']);
   }
 }
