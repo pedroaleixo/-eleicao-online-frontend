@@ -77,8 +77,22 @@ export class VotacaoPageComponent implements AfterViewInit, OnInit {
   }
 
 
-  podeVotar(eleicao:Eleicao){
+  podeVotar(eleicao:Eleicao):boolean{
     if(eleicao && eleicao.situacao == SituacaoEleicao.INICIADA.valueOf() && this.mapEleitorNaoVotou.get(eleicao.id)){
+      return true;
+    }
+    return false;
+  }
+
+  isVotou(eleicao:Eleicao):boolean{
+    if(eleicao && !this.mapEleitorNaoVotou.get(eleicao.id)){
+      return true;
+    }
+    return false;
+  }
+
+  isFinalizada(eleicao:Eleicao):boolean{
+    if(eleicao && eleicao.situacao == SituacaoEleicao.FINALIZADA.valueOf()){
       return true;
     }
     return false;
